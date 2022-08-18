@@ -15,9 +15,10 @@ app.set('port', process.env.PORT || 3000)
 // Global middleware
 app.use(apiContentType)
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 // Set up routers
-app.use('/api/v1/movies', movieRouter)
+app.use('/api/v1/', movieRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)

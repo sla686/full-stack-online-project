@@ -1,16 +1,16 @@
 {
-  "name": "express-typescript-starter",
-  "version": "0.1.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "name": "full-stack-online-shop",
+  "version": "1.0.0",
+  "description": "An online shop project",
   "repository": {
     "type": "git",
     "url": "https://github.com/Microsoft/TypeScript-Node-Starter"
   },
-  "author": "Bowden Kelly",
+  "author": "Viacheslav Semushin",
   "license": "MIT",
   "scripts": {
     "start:prod": "node dist/server.js",
-    "start:dev": "nodemon src/server.ts",
+    "start:dev": "nodemon --exec npx ts-node ./src/server.ts",
     "build": "tsc",
     "watch-ts": "tsc -w",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose false",
@@ -54,8 +54,8 @@
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2",
     "ts-jest": "^26.5.1",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.10"
   },
   "husky": {
     "hooks": {
