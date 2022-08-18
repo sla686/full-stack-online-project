@@ -5,7 +5,6 @@ import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
 // POST /users
-// prettier-ignore
 export const createUser = async (
   req: Request, 
   res: Response, 

@@ -4,7 +4,7 @@ import { createUser, findAll } from '../controllers/user'
 
 const router = express.Router()
 
-// Every path we define here will get /api/v1/movies prefix
+// Every path we define here will get /api/v1/users prefix
 // prettier-ignore
 router
   .route('/')
