@@ -1,19 +1,15 @@
 import errorHandler from 'errorhandler'
-import mongoose from 'mongoose'
+import mongoose, { mongo } from 'mongoose'
 
 import app from './app'
 import { MONGODB_URI } from './util/secrets'
 import logger from './util/logger'
+import console from 'console'
 
 const mongoUrl = MONGODB_URI
 
 mongoose
-  .connect(mongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
+  .connect(mongoUrl)
   .then(() => {
     logger.info('Connected to MongoDB')
   })
