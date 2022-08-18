@@ -39,3 +39,6 @@ dist/**/*
 
 *.swo
 *.swp
+
+package-lock.json
+yarn.lock
