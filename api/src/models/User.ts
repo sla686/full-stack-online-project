@@ -5,8 +5,8 @@ import crypto from 'crypto'
 export type UserDocument = Document & {
   name: string
   email: string
-  hashed_password: string | undefined
-  salt: string | undefined
+  hashed_password: string
+  salt: string
   updated: Date
   created: Date
   seller: boolean
@@ -27,7 +27,7 @@ const UserSchema = new Schema<UserDocument>({
   },
   hashed_password: {
     type: String,
-    required: 'Password is required',
+    required: [true, 'Password is required'],
   },
   salt: String,
   updated: Date,
@@ -58,7 +58,7 @@ UserSchema.path('hashed_password').validate(function (this: any) {
   if (this.isNew && !this._password) {
     this.invalidate('password', 'Password is required')
   }
-}, undefined)
+})
 
 UserSchema.methods = {
   authenticate: function (this: any, plainText: string) {
