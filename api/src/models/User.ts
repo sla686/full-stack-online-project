@@ -12,6 +12,7 @@ export type UserDocument = Document & {
   seller: boolean
 }
 
+// Mongoose version 6+ syntax!
 const UserSchema = new Schema<UserDocument>({
   name: {
     type: String,

@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { createUser, findAll } from '../controllers/user'
+import { createUser, findAll, findById } from '../controllers/user'
 
 const router = express.Router()
 
@@ -12,10 +12,10 @@ router
   .post(createUser)
 
 // prettier-ignore
-// router
-//   .route('/:userId')
-//   .get(findById)
-//   .put(updateUser)
-//   .delete(deleteUser)
+router
+  .route('/:userId')
+  .get(findById)
+// .put(updateUser)
+// .delete(deleteUser)
 
 export default router

@@ -6,8 +6,8 @@ import { BadRequestError } from '../helpers/apiError'
 
 // POST /users
 export const createUser = async (
-  req: Request, 
-  res: Response, 
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
   // Mongoose will first validate and then save the new user
@@ -19,15 +19,12 @@ export const createUser = async (
       password,
     })
 
-    // await User.init()
     await UserService.create(user)
     res.json(user)
-  }
-  catch (error) {
+  } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
     } else {
-      console.log('My error is here after user creation')
       next(error)
     }
   }
@@ -45,7 +42,25 @@ export const findAll = async (
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
     } else {
-      console.log('My error is here after findAll')
+      next(error)
+    }
+  }
+}
+
+// GET /users/:userId
+export const findById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(await UserService.findById(req.params.userId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      console.log('My error is here after findById')
+      console.log(error)
       next(error)
     }
   }
