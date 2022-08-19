@@ -59,7 +59,39 @@ export const findById = async (
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
     } else {
-      console.log('My error is here after findById')
+      next(error)
+    }
+  }
+}
+
+// PUT /users/:userId
+// BUG cannot use "findByIdandUpdate" method here because it doesn't call setters for virtual "password" field!
+// Issue: https://github.com/Automattic/mongoose/issues/8804
+// Possible fix in Mongoose 6.6+
+export const updateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userUpdate = req.body
+    userUpdate.updated = Date.now()
+    const userId = req.params.userId
+
+    await UserService.update(userId, userUpdate)
+
+    // TEMPORARY SOLUTION ONLY! Manually insert password field to trigger setters!
+    const updatedUser = await UserService.findById(userId)
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    updatedUser.password = userUpdate.password
+    await updatedUser.save()
+
+    res.json(await UserService.findById(userId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
       console.log(error)
       next(error)
     }
