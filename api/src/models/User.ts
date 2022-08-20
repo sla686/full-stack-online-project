@@ -7,7 +7,7 @@ export type UserDocument = Document & {
   email: string
   hashed_password: string
   salt: string
-  updated: Date
+  updated?: Date
   created: Date
   seller: boolean
 }
