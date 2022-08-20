@@ -42,17 +42,28 @@ const UserSchema = new Schema<UserDocument>({
   },
 })
 
+// An interface is needed to be able to use vertual field and schema's methods
+// Might be a little bit complicated, possibly need to refactor this code
+// Virtual field can be refactored to rely more on 'Schema.pre' method
+interface UserBaseDocument extends UserDocument, Document {
+  password: string
+  _password: string
+  makeSalt(): string
+  encryptPassword(password: string): string
+  authenticate(plainText: string): boolean
+}
+
 UserSchema.virtual('password')
-  .set(function (this: any, password: string) {
+  .set(function (this: UserBaseDocument, password: string) {
     this._password = password
     this.salt = this.makeSalt()
     this.hashed_password = this.encryptPassword(password)
   })
-  .get(function (this: any) {
+  .get(function (this: UserBaseDocument) {
     return this._password
   })
 
-UserSchema.path('hashed_password').validate(function (this: any) {
+UserSchema.path('hashed_password').validate(function (this: UserBaseDocument) {
   if (this._password && this._password.length < 6) {
     this.invalidate('password', 'Password must be at least 6 characters.')
   }
@@ -62,10 +73,10 @@ UserSchema.path('hashed_password').validate(function (this: any) {
 })
 
 UserSchema.methods = {
-  authenticate: function (this: any, plainText: string) {
+  authenticate: function (this: UserBaseDocument, plainText: string) {
     return this.encryptPassword(plainText) === this.hashed_password
   },
-  encryptPassword: function (this: any, password: string) {
+  encryptPassword: function (this: UserBaseDocument, password: string) {
     if (!password) return ''
     try {
       return crypto
@@ -83,4 +94,4 @@ UserSchema.methods = {
 
 UserSchema.plugin(uniqueValidator)
 
-export default model<UserDocument>('User', UserSchema)
+export default model<UserBaseDocument>('User', UserSchema)

@@ -81,14 +81,16 @@ export const updateUser = async (
     await UserService.update(userId, userUpdate)
 
     // TEMPORARY SOLUTION ONLY! Manually insert password field to trigger setters!
-    const updatedUser = await UserService.findById(userId)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    updatedUser.password = userUpdate.password
-    await updatedUser.save()
-
+    if (userUpdate.hasOwnProperty('password')) {
+      const updatedUser = await UserService.findById(userId)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      updatedUser.password = userUpdate.password
+      await updatedUser.save()
+    }
     res.status(200).json(await UserService.findById(userId))
   } catch (error) {
+    console.log(error)
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
     } else {

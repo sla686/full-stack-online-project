@@ -8,6 +8,8 @@ import {
   deleteUser,
 } from '../controllers/user'
 
+import { requireSignin, hasAuthorization } from '../controllers/auth'
+
 const router = express.Router()
 
 // Every path we define here will get /api/v1/users prefix
@@ -20,8 +22,8 @@ router
 // prettier-ignore
 router
   .route('/:userId')
-  .get(findById)
-  .put(updateUser)
-  .delete(deleteUser)
+  .get(requireSignin, findById)
+  .put(requireSignin, hasAuthorization, updateUser)
+  .delete(requireSignin, hasAuthorization, deleteUser)
 
 export default router
