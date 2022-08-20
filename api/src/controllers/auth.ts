@@ -6,7 +6,7 @@ import User from '../models/User'
 import UserService from '../services/user'
 import { JWT_SECRET } from '../util/secrets'
 
-export const signin = async (req: Request, res: Response) => {
+const signin = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({
       email: req.body.email,
@@ -50,19 +50,19 @@ export const signin = async (req: Request, res: Response) => {
   }
 }
 
-export const signout = async (req: Request, res: Response) => {
+const signout = async (req: Request, res: Response) => {
   res.clearCookie('t')
   return res.status(200).json({
     message: 'signed out',
   })
 }
 
-export const requireSignin = expressjwt({
+const requireSignin = expressjwt({
   secret: JWT_SECRET,
   algorithms: ['HS256'],
 })
 
-export const hasAuthorization = async (
+const hasAuthorization = async (
   req: RequestAuth,
   res: Response,
   next: NextFunction
@@ -77,3 +77,5 @@ export const hasAuthorization = async (
   }
   next()
 }
+
+export default { signin, signout, requireSignin, hasAuthorization }

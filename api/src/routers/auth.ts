@@ -1,14 +1,14 @@
 import express from 'express'
-import { signin, signout } from '../controllers/auth'
+import AuthController from '../controllers/auth'
 
 const router = express.Router()
 
 //prettier-ignore
 router.route('/signin')
-  .post(signin)
+  .post(AuthController.signin)
 
 //prettier-ignore
 router.route('/signout')
-  .get(signout)
+  .get(AuthController.signout)
 
 export default router

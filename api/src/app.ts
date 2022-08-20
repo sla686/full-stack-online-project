@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import movieRouter from './routers/movie'
 import userRouter from './routers/user'
 import authRouter from './routers/auth'
+import shopRouter from './routers/shop'
 import apiErrorHandler from './middlewares/apiErrorHandler'
 import apiContentType from './middlewares/apiContentType'
 
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use('/api/v1/movies', movieRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/shops', shopRouter)
 
 // Custom API error handler
 app.use(apiErrorHandler)

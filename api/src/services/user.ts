@@ -1,19 +1,20 @@
+import mongoose from 'mongoose'
+
 import User, { UserDocument } from '../models/User'
 import { NotFoundError } from '../helpers/apiError'
-import mongoose from 'mongoose'
 
 const create = async (user: UserDocument): Promise<UserDocument> => {
   return user.save()
 }
 
 const findAll = async (): Promise<UserDocument[]> => {
-  return User.find().select('name email updated created')
+  return User.find().select('name email seller updated created')
 }
 
 const findById = async (userId: string): Promise<UserDocument> => {
   let foundUser = null
   if (mongoose.Types.ObjectId.isValid(userId))
-    foundUser = await User.findById(userId, 'name email updated created')
+    foundUser = await User.findById(userId, 'name email seller updated created')
 
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
@@ -34,7 +35,7 @@ const update = async (
     // I'm doing additional steps in the controller file
     foundUser = await User.findByIdAndUpdate(userId, update, {
       new: true,
-      select: 'name email updated created',
+      select: 'name email seller updated created',
     })
   }
   if (!foundUser) {
@@ -47,7 +48,7 @@ const update = async (
 const remove = async (userId: string): Promise<UserDocument | null> => {
   let foundUser = null
   if (mongoose.Types.ObjectId.isValid(userId)) {
-    foundUser = User.findByIdAndDelete(userId)
+    foundUser = await User.findByIdAndDelete(userId)
   }
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)

@@ -5,11 +5,7 @@ import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
 // POST /users
-export const createUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   // Mongoose will first validate and then save the new user
   try {
     const { name, email, password } = req.body
@@ -31,11 +27,7 @@ export const createUser = async (
 }
 
 // GET /users
-export const findAll = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const findAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.status(200).json(await UserService.findAll())
   } catch (error) {
@@ -48,11 +40,7 @@ export const findAll = async (
 }
 
 // GET /users/:userId
-export const findById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const findById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.status(200).json(await UserService.findById(req.params.userId))
   } catch (error) {
@@ -68,11 +56,7 @@ export const findById = async (
 // BUG cannot use "mongoose.findByIdAndUpdate" method here because it doesn't call setters for virtual "password" field!
 // Issue: https://github.com/Automattic/mongoose/issues/8804
 // Possible fix in Mongoose 6.6+
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const userUpdate = req.body
     userUpdate.updated = Date.now()
@@ -101,11 +85,7 @@ export const updateUser = async (
 }
 
 // DELETE /users/:userId
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await UserService.remove(req.params.userId)
     res.status(204).end()
@@ -116,4 +96,34 @@ export const deleteUser = async (
       next(error)
     }
   }
+}
+
+// POST /shops/by/:userId
+const isSeller = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const foundUser = await UserService.findById(req.params.userId)
+    const isSeller = foundUser && foundUser.seller
+    if (!isSeller) {
+      return res.status(403).json({
+        error: 'User is not a seller',
+      })
+    }
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+
+  next()
+}
+
+export default {
+  create,
+  findById,
+  findAll,
+  remove,
+  update,
+  isSeller,
 }

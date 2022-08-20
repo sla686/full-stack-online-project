@@ -5,9 +5,13 @@ import { BadRequestError } from '../helpers/apiError'
 export default function (req: Request, res: Response, next: NextFunction) {
   if (
     (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') &&
-    !req.is('application/json')
+    !(req.is('application/json') || req.is('multipart/form-data'))
   ) {
-    next(new BadRequestError('Request body must be of type json'))
+    next(
+      new BadRequestError(
+        'Request body must be of type application/json or multipart/form-data'
+      )
+    )
   } else {
     next()
   }
