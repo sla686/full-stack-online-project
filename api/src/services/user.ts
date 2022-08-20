@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 import User, { UserDocument } from '../models/User'
-import { NotFoundError } from '../helpers/apiError'
+import { BadRequestError, NotFoundError } from '../helpers/apiError'
 
 const create = async (user: UserDocument): Promise<UserDocument> => {
   return user.save()
@@ -13,9 +13,11 @@ const findAll = async (): Promise<UserDocument[]> => {
 
 const findById = async (userId: string): Promise<UserDocument> => {
   let foundUser = null
-  if (mongoose.Types.ObjectId.isValid(userId))
+  if (mongoose.Types.ObjectId.isValid(userId)) {
     foundUser = await User.findById(userId, 'name email seller updated created')
-
+  } else {
+    throw new BadRequestError('User ID is not valid!')
+  }
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
   }
@@ -37,6 +39,8 @@ const update = async (
       new: true,
       select: 'name email seller updated created',
     })
+  } else {
+    throw new BadRequestError('User ID is not valid!')
   }
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
@@ -49,6 +53,8 @@ const remove = async (userId: string): Promise<UserDocument | null> => {
   let foundUser = null
   if (mongoose.Types.ObjectId.isValid(userId)) {
     foundUser = await User.findByIdAndDelete(userId)
+  } else {
+    throw new BadRequestError('User ID is not valid!')
   }
   if (!foundUser) {
     throw new NotFoundError(`User ${userId} not found`)
