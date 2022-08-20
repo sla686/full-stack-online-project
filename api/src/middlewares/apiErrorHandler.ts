@@ -14,9 +14,11 @@ export default function (
   }
 
   res.status(error.statusCode).json({
-    status: 'error',
+    status: error.name,
     statusCode: error.statusCode,
     message: error.message,
-    info: error.source?.message,
+    info: error.source?.message.startsWith('User validation failed')
+      ? error.source?.message.slice(24).replace(/^\w/, (c) => c.toUpperCase())
+      : error.source?.message,
   })
 }
