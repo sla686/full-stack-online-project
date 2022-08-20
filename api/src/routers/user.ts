@@ -1,6 +1,12 @@
 import express from 'express'
 
-import { createUser, findAll, findById, updateUser } from '../controllers/user'
+import {
+  createUser,
+  findAll,
+  findById,
+  updateUser,
+  deleteUser,
+} from '../controllers/user'
 
 const router = express.Router()
 
@@ -16,6 +22,6 @@ router
   .route('/:userId')
   .get(findById)
   .put(updateUser)
-// .delete(deleteUser)
+  .delete(deleteUser)
 
 export default router

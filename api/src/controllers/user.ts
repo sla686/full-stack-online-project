@@ -20,7 +20,7 @@ export const createUser = async (
     })
 
     await UserService.create(user)
-    res.json(user)
+    res.status(200).json(user)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -37,7 +37,7 @@ export const findAll = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await UserService.findAll())
+    res.status(200).json(await UserService.findAll())
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -54,7 +54,7 @@ export const findById = async (
   next: NextFunction
 ) => {
   try {
-    res.json(await UserService.findById(req.params.userId))
+    res.status(200).json(await UserService.findById(req.params.userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
@@ -65,7 +65,7 @@ export const findById = async (
 }
 
 // PUT /users/:userId
-// BUG cannot use "findByIdandUpdate" method here because it doesn't call setters for virtual "password" field!
+// BUG cannot use "mongoose.findByIdAndUpdate" method here because it doesn't call setters for virtual "password" field!
 // Issue: https://github.com/Automattic/mongoose/issues/8804
 // Possible fix in Mongoose 6.6+
 export const updateUser = async (
@@ -87,12 +87,30 @@ export const updateUser = async (
     updatedUser.password = userUpdate.password
     await updatedUser.save()
 
-    res.json(await UserService.findById(userId))
+    res.status(200).json(await UserService.findById(userId))
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
       next(new BadRequestError('Invalid Request', error))
     } else {
       console.log(error)
+      next(error)
+    }
+  }
+}
+
+// DELETE /users/:userId
+export const deleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await UserService.remove(req.params.userId)
+    res.status(204).end()
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
       next(error)
     }
   }

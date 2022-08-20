@@ -44,9 +44,22 @@ const update = async (
   return foundUser
 }
 
+const remove = async (userId: string): Promise<UserDocument | null> => {
+  let foundUser = null
+  if (mongoose.Types.ObjectId.isValid(userId)) {
+    foundUser = User.findByIdAndDelete(userId)
+  }
+  if (!foundUser) {
+    throw new NotFoundError(`User ${userId} not found`)
+  }
+
+  return foundUser
+}
+
 export default {
   create,
   findAll,
   findById,
   update,
+  remove,
 }
