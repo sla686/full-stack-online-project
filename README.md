@@ -27,8 +27,8 @@ The project consists of:
 
 2. Backend:
 
-- Node.js 16+
-- Express.js 16+
+- Node.js (16+)
+- Express.js (4.17+)
 - MongoDB(mongoose 6+)
 
 Additionally, 'Jest' and 'mongodb-memory-server' are used for testing. 'JWTs' are used for authentication, and 'cookies' are used for authorization.
