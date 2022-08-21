@@ -3,14 +3,14 @@
 # Online Shop
 
 Online Shop is a fullstack project written with MERN stack and TypeScript. This is my first fullstack project I have ever done!
-Thanks to this project I have learned a lot about building a fullstack web application, as well as designing backend and frontend parts to coordinate together.
+Thanks to this project I have learned a lot about building a fullstack web application, as well as designing backend and frontend parts to coordinate with each other.
 The project is in active development and I am implementing more API endpoints as well as extending the UI.
 
 [About](#about) •
 [Demo](#demo) •
 [Installation](#installation) •
 [Author](#author) •
-[License](#license) •
+[License](#license)
 
 </div>
 
