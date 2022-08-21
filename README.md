@@ -3,14 +3,14 @@
 # Online Shop
 
 Online Shop is a fullstack project written with MERN stack and TypeScript. This is my first fullstack project I have ever done!
-Thanks to this project I have learned a lot about building a fullstack web application, as well as designing backend and frontend parts to coordinate together.
+Thanks to this project I have learned a lot about building a fullstack web application, as well as designing backend and frontend parts to coordinate with each other.
 The project is in active development and I am implementing more API endpoints as well as extending the UI.
 
 [About](#about) •
 [Demo](#demo) •
 [Installation](#installation) •
 [Author](#author) •
-[License](#license) •
+[License](#license)
 
 </div>
 
@@ -27,8 +27,8 @@ The project consists of:
 
 2. Backend:
 
-- Node.js 16+
-- Express.js 16+
+- Node.js (16+)
+- Express.js (4.17+)
 - MongoDB(mongoose 6+)
 
 Additionally, 'Jest' and 'mongodb-memory-server' are used for testing. 'JWTs' are used for authentication, and 'cookies' are used for authorization.
