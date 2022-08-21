@@ -3,7 +3,7 @@ import fs from 'fs'
 import { Fields, Files, formidable } from 'formidable'
 // import extend from 'lodash/extend'
 
-import Shop from '../models/shop'
+import Shop from '../models/Shop'
 import ShopService from '../services/shop'
 import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
