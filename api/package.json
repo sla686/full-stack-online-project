@@ -76,8 +76,5 @@
       "npx prettier --write",
       "eslint --fix"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }

@@ -30,7 +30,7 @@ router
 
 router
   .route('/:shopId')
-  .put(
+  .patch(
     AuthController.requireSignin
     // ShopController.isOwner,
     // ShopController.update
