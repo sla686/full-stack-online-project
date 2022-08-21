@@ -4,7 +4,7 @@
   "description": "An online shop project",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Microsoft/TypeScript-Node-Starter"
+    "url": "https://github.com/sla686/full-stack-online-shop"
   },
   "engines": {
     "node": "16.x"
