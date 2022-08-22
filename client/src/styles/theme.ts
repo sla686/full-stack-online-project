@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles'
-import { blueGrey, lightGreen } from '@mui/material/colors'
 
 const theme = createTheme({
   palette: {
@@ -15,8 +14,6 @@ const theme = createTheme({
       dark: '#7ecb20',
       contrastText: '#000',
     },
-    /*     openTitle: blueGrey['400'],
-    protectedTitle: lightGreen['400'], */
     mode: 'light',
   },
 })
