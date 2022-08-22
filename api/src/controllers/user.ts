@@ -8,11 +8,12 @@ import { BadRequestError } from '../helpers/apiError'
 const create = async (req: Request, res: Response, next: NextFunction) => {
   // Mongoose will first validate and then save the new user
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, seller } = req.body
     const user = new User({
       name,
       email,
       password,
+      seller,
     })
 
     await UserService.create(user)
@@ -52,7 +53,7 @@ const findById = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-// PUT /users/:userId
+// PATCH /users/:userId
 // BUG cannot use "mongoose.findByIdAndUpdate" method here because it doesn't call setters for virtual "password" field!
 // Issue: https://github.com/Automattic/mongoose/issues/8804
 // Possible fix in Mongoose 6.6+

@@ -15,17 +15,17 @@ router.route('/')
 router
   .route('/:userId')
   .get(
-    // AuthController.requireSignin, 
+    AuthController.requireSignin, 
     UserController.findById
   )
   .patch(
-    // AuthController.requireSignin,
-    // AuthController.hasAuthorization,
+    AuthController.requireSignin,
+    AuthController.hasAuthorization,
     UserController.update
   )
   .delete(
-    // AuthController.requireSignin,
-    // AuthController.hasAuthorization,
+    AuthController.requireSignin,
+    AuthController.hasAuthorization,
     UserController.remove
   )
 
