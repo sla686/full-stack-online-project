@@ -47,7 +47,7 @@ _Note: more to be added!_
 ## Demo
 
 - Backend: [User Collection Example](https://backend-online-shop-sla686.herokuapp.com/api/v1/users)
-- Frontend: _Under development_
+- Frontend: [Online Shop](https://fullstack-online-shop.netlify.app/)
 
 ## Installation
 
