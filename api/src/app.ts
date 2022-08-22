@@ -1,6 +1,7 @@
 import express from 'express'
 // import lusca from 'lusca' will be used later
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import dotenv from 'dotenv'
 
 import movieRouter from './routers/movie'
@@ -21,6 +22,7 @@ app.use(apiContentType)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
+app.use(cors())
 
 // Set up routers
 app.use('/api/v1/movies', movieRouter)
