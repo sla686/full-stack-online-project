@@ -3,8 +3,8 @@ export interface User {
   name: string
   email: string
   seller: boolean
-  created: Date
-  updated?: Date
+  created: Date | string
+  updated?: Date | string
 }
 
 export interface UserReducerState {
