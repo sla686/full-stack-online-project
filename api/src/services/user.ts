@@ -4,11 +4,11 @@ import User, { UserDocument } from '../models/User'
 import { BadRequestError, NotFoundError } from '../helpers/apiError'
 
 const create = async (user: UserDocument): Promise<UserDocument> => {
-  return user.save()
+  return await user.save()
 }
 
 const findAll = async (): Promise<UserDocument[]> => {
-  return User.find().select('name email seller updated created')
+  return await User.find().select('name email seller updated created')
 }
 
 const findById = async (userId: string): Promise<UserDocument> => {
