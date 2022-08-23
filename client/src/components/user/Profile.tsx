@@ -15,10 +15,10 @@ import Person from '@mui/icons-material/Person'
 import { useTheme } from '@mui/material/styles'
 
 import { read } from '../user/api-user'
-// import { User } from '../../types/user'
+import { User } from '../../types/user'
 
 const Profile = () => {
-  const [user, setUser] = useState<any>()
+  const [user, setUser] = useState<User>()
   const [redirectToSignin, setRedirectToSignin] = useState(false)
   const theme = useTheme()
   const { userId } = useParams()
@@ -79,7 +79,7 @@ const Profile = () => {
         <Divider />
         <ListItem>
           <ListItemText
-            primary={'Joined: ' + new Date(user?.created).toDateString()}
+            primary={'Joined: ' + new Date(user?.created ?? 0).toDateString()}
           />
         </ListItem>
       </List>
