@@ -1,18 +1,17 @@
 import { User } from '../../types/user'
 
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+
 const create = async (user: User) => {
   try {
-    const response = await fetch(
-      'https://backend-online-shop-sla686.herokuapp.com/api/v1/users/',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    const response = await fetch(`${URL}/users/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -21,13 +20,10 @@ const create = async (user: User) => {
 
 const list = async (signal: AbortSignal) => {
   try {
-    const response = await fetch(
-      'https://backend-online-shop-sla686.herokuapp.com/api/v1/users/',
-      {
-        method: 'GET',
-        signal: signal,
-      }
-    )
+    const response = await fetch(`${URL}/users/`, {
+      method: 'GET',
+      signal: signal,
+    })
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -40,19 +36,15 @@ const read = async (
   signal: AbortSignal
 ) => {
   try {
-    const response = await fetch(
-      'https://backend-online-shop-sla686.herokuapp.com/api/v1/users/' +
-        params.userId,
-      {
-        method: 'GET',
-        signal: signal,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + credentials.t,
-        },
-      }
-    )
+    const response = await fetch(`${URL}/users/${params.userId}`, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+    })
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -65,19 +57,15 @@ const update = async (
   user: User
 ) => {
   try {
-    const response = await fetch(
-      'https://backend-online-shop-sla686.herokuapp.com/api/v1/users/' +
-        params.userId,
-      {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + credentials.t,
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    const response = await fetch(`${URL}/users/${params.userId}`, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+      body: JSON.stringify(user),
+    })
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -89,18 +77,14 @@ const remove = async (
   credentials: { t: string }
 ) => {
   try {
-    const response = await fetch(
-      'https://backend-online-shop-sla686.herokuapp.com/api/v1/users/' +
-        params.userId,
-      {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + credentials.t,
-        },
-      }
-    )
+    const response = await fetch(`${URL}/users/${params.userId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+    })
     return await response.json()
   } catch (err) {
     console.log(err)

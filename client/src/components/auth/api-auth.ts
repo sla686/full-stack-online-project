@@ -1,0 +1,31 @@
+import { User } from '../../types/user'
+
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+
+const signin = async (user: User) => {
+  try {
+    const response = await fetch(`${URL}/auth/signin/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(user),
+    })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const signout = async () => {
+  try {
+    const response = await fetch(`${URL}/auth/signout/`, { method: 'GET' })
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { signin, signout }

@@ -38,12 +38,9 @@ const Users = () => {
   }, [])
 
   return (
-    <Paper
-      sx={{ padding: theme.spacing(1), margin: theme.spacing(5) }}
-      elevation={4}
-    >
+    <Paper sx={{ p: 3, m: 'auto', mt: 5, maxWidth: 600 }} elevation={4}>
       <Typography
-        sx={{ margin: `${theme.spacing(4)} 0 ${theme.spacing(2)}` }}
+        sx={{ margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}` }}
         variant="h6"
       >
         All Users
