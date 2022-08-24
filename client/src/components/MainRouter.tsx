@@ -5,6 +5,8 @@ import HomePage from './core/HomePage'
 import Menu from './core/Menu'
 import Users from './user/Users'
 import Profile from './user/Profile'
+import SignUp from './user/SignUp'
+import SignIn from './auth/SignIn'
 
 const MainRouter = () => {
   return (
@@ -14,9 +16,8 @@ const MainRouter = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/:userId" element={<Profile />} />
-        {/*
-        <Route path="/signup" component={Signup} />
-        <Route path="/signin" component={Signin} />} */}
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route
           path="*"
           element={

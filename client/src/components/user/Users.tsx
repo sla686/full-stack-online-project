@@ -11,13 +11,26 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import Person from '@mui/icons-material/Person'
 import ArrowForward from '@mui/icons-material/ArrowForward'
-import { useTheme } from '@mui/material/styles'
+import { styled } from '@mui/system'
 
 import { list } from '../user/api-user'
 import { User } from '../../types/user.js'
 
+const PaperStyle = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(3),
+  margin: 'auto',
+  marginTop: theme.spacing(5),
+  maxWidth: 600,
+}))
+
+const TypographyStyle = styled(Typography)(({ theme }) => ({
+  marginTop: theme.spacing(3),
+  marginBottom: theme.spacing(2),
+  marginLeft: 'auto',
+  marginRight: 'auto',
+}))
+
 const Users = () => {
-  const theme = useTheme()
   const [users, setUsers] = useState<User[]>([])
 
   useEffect(() => {
@@ -38,13 +51,8 @@ const Users = () => {
   }, [])
 
   return (
-    <Paper sx={{ p: 3, m: 'auto', mt: 5, maxWidth: 600 }} elevation={4}>
-      <Typography
-        sx={{ margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}` }}
-        variant="h6"
-      >
-        All Users
-      </Typography>
+    <PaperStyle elevation={4}>
+      <TypographyStyle variant="h6">All Users</TypographyStyle>
       <List dense>
         {users.map((item, i) => (
           <Link to={'/users/' + item._id} key={i}>
@@ -64,7 +72,7 @@ const Users = () => {
           </Link>
         ))}
       </List>
-    </Paper>
+    </PaperStyle>
   )
 }
 

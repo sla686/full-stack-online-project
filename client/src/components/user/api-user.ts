@@ -1,8 +1,9 @@
-import { User } from '../../types/user'
+import { User, UserCreation } from '../../types/user'
 
 const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
-const create = async (user: User) => {
+const create = async (user: UserCreation) => {
+  console.log('body:', JSON.stringify(user))
   try {
     const response = await fetch(`${URL}/users/`, {
       method: 'POST',
@@ -12,6 +13,7 @@ const create = async (user: User) => {
       },
       body: JSON.stringify(user),
     })
+    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -24,6 +26,7 @@ const list = async (signal: AbortSignal) => {
       method: 'GET',
       signal: signal,
     })
+    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -45,6 +48,7 @@ const read = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
+    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -66,6 +70,7 @@ const update = async (
       },
       body: JSON.stringify(user),
     })
+    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -85,6 +90,7 @@ const remove = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
+    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
