@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
@@ -17,13 +17,14 @@ const isActive = (path: string) => {
   else return { color: '#ffffff' }
 }
 
-const Menu = () => (
-  <AppBar position="static">
-    <Toolbar>
-      <Typography variant="h6" color="inherit">
-        MERN Online Shop
-      </Typography>
-      <div>
+const Menu = () => {
+  const navigate = useNavigate()
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" color="inherit">
+          MERN Online Shop
+        </Typography>
         <Link to="/">
           <IconButton aria-label="Home" style={isActive('/')}>
             <HomeIcon />
@@ -44,9 +45,28 @@ const Menu = () => (
             </Link>
           </span>
         )}
-      </div>
-    </Toolbar>
-  </AppBar>
-)
+        {auth.isAuthenticated() && (
+          <span>
+            <Link to={'/users/' + auth.isAuthenticated().user._id}>
+              <Button
+                style={isActive('/users/' + auth.isAuthenticated().user._id)}
+              >
+                My Profile
+              </Button>
+            </Link>
+            <Button
+              color="inherit"
+              onClick={() => {
+                auth.clearJWT(() => navigate('/'))
+              }}
+            >
+              Sign out
+            </Button>
+          </span>
+        )}
+      </Toolbar>
+    </AppBar>
+  )
+}
 
 export default Menu

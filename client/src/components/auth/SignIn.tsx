@@ -34,7 +34,9 @@ const SignIn = () => {
       //     setValues({ ...values, error: '', redirectToReferrer: true })
       //   })
       // }
-      auth.authenticate(data.token, () => {
+      if (!data?.token)
+        throw new Error('Something went wrong while obraining a token')
+      auth.authenticate(data, () => {
         setValues({ ...values, error: '', redirectToReferrer: true })
       })
     })

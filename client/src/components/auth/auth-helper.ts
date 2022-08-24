@@ -1,7 +1,7 @@
 import { signout } from './api-auth'
 
 const auth = {
-  authenticate(jwt: string, cb: any) {
+  authenticate(jwt: object, cb: any) {
     if (typeof window !== 'undefined')
       sessionStorage.setItem('jwt', JSON.stringify(jwt))
     cb()

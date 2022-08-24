@@ -36,18 +36,16 @@ const HomePage = () => {
     <CardStyle>
       <TypographyHome variant="h6">Home Page</TypographyHome>
       <CardMediaStyle image={unicornbikeImg} title="Unicorn Bicycle" />
-      <TypographyPhoto>
-        <Typography variant="body2" component="p" color="textSecondary">
-          Photo by{' '}
-          <a
-            href="https://unsplash.com/@boudewijn_huysmans"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Boudewijn Huysmans
-          </a>{' '}
-          on Unsplash
-        </Typography>
+      <TypographyPhoto variant="body2" color="textSecondary">
+        Photo by{' '}
+        <a
+          href="https://unsplash.com/@boudewijn_huysmans"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Boudewijn Huysmans
+        </a>{' '}
+        on Unsplash
       </TypographyPhoto>
       <CardContent>
         <Typography variant="body1" component="p">
