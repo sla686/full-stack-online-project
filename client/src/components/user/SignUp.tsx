@@ -35,7 +35,7 @@ const SignUp = () => {
       email: values.email || undefined,
       password: values.password || undefined,
     }
-    create(user).then((data: Response) => {
+    create(user).then(() => {
       // if (!data.ok) {
       //   setValues({ ...values, error: data.statusText })
       // } else {

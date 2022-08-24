@@ -16,7 +16,7 @@ const auth = {
   clearJWT(cb: any) {
     if (typeof window !== 'undefined') sessionStorage.removeItem('jwt')
     cb()
-    signout().then((data) => {
+    signout().then(() => {
       document.cookie = 't=; expires=Thu, 01 Jan 1970 UTC; path=/;'
     })
   },

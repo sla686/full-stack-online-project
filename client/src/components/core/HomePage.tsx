@@ -2,7 +2,7 @@ import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
+// import { useTheme } from '@mui/material/styles'
 import { styled } from '@mui/system'
 
 import unicornbikeImg from '../../images/unicornbike.jpeg'
@@ -18,7 +18,7 @@ const TypographyHome = styled(Typography)(({ theme }) => ({
   padding: `${theme.spacing(3)} ${theme.spacing(2.5)} ${theme.spacing(2)}`,
 }))
 
-const TypographyPhoto = styled(Typography)(({ theme }) => ({
+const TypographyPhoto = styled(Typography)(() => ({
   padding: '10px',
   textAlign: 'right',
   backgroundColor: '#ededed',
@@ -28,11 +28,10 @@ const TypographyPhoto = styled(Typography)(({ theme }) => ({
   },
 }))
 
-const CardMediaStyle = styled(CardMedia)(({ theme }) => ({
+const CardMediaStyle = styled(CardMedia)(() => ({
   minHeight: 400,
 }))
 const HomePage = () => {
-  const theme = useTheme()
   return (
     <CardStyle>
       <TypographyHome variant="h6">Home Page</TypographyHome>
