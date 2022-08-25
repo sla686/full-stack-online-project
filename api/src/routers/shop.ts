@@ -7,8 +7,8 @@ import ShopController from '../controllers/shop'
 const router = express.Router()
 
 //prettier-ignore
-// router.route('/')
-//   .get(ShopController.findAll)
+router.route('/')
+  .get(ShopController.findAll)
 
 //prettier-ignore
 // router.route('/:shopId')
@@ -17,16 +17,16 @@ const router = express.Router()
 router
   .route('/by/:userId')
   .post(
-/*     AuthController.requireSignin,
-    AuthController.hasAuthorization, */
+    AuthController.requireSignin,
+    AuthController.hasAuthorization,
     UserController.isSeller,
     ShopController.create
   )
-  .get(
-/*     AuthController.requireSignin,
-    AuthController.hasAuthorization, */
-    // ShopController.listByOwner
-  )
+// .get(
+//   AuthController.requireSignin,
+//   AuthController.hasAuthorization,
+//   ShopController.listByOwner
+// )
 
 router
   .route('/:shopId')

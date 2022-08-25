@@ -7,4 +7,8 @@ const create = async (shop: ShopDocument): Promise<ShopDocument> => {
   return await shop.save()
 }
 
-export default { create }
+const findAll = async (): Promise<ShopDocument[]> => {
+  return await Shop.find()
+}
+
+export default { create, findAll }
