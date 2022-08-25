@@ -63,8 +63,9 @@ const EditProfile = () => {
       name: values.name || undefined,
       email: values.email || undefined,
       password: values.password || undefined,
-      seller: values.seller || undefined,
+      seller: values.seller ?? undefined,
     }
+    console.log('Pressed submit: ', user)
     update(
       {
         userId: userId ?? '',
