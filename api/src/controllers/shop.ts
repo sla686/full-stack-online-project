@@ -25,12 +25,13 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
         console.log(files)
         if (files.image instanceof Array) {
           shop.image = fs.readFileSync(files.image[0].filepath)
-          shop.name =
-            files.image[0].originalFilename || files.image[0].newFilename
+          // shop.image.name =
+          //   files.image[0].originalFilename || files.image[0].newFilename
           // shop.image.ContentType = files.image[0].type
         } else {
           shop.image = fs.readFileSync(files.image.filepath)
-          shop.name = files.image.originalFilename || files.image.newFilename
+          // shop.image.name =
+          //   files.image.originalFilename || files.image.newFilename
           // shop.image.ContentType = files.image.type
         }
       }
@@ -47,4 +48,16 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-export default { create }
+const findAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(200).json(await ShopService.findAll())
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export default { create, findAll }
