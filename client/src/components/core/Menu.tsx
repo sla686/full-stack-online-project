@@ -16,6 +16,11 @@ const isActive = (path: string) => {
   if (location.pathname === path) return { color: '#ff6000' }
   else return { color: '#ffffff' }
 }
+const isPartActive = (path: string) => {
+  const location = useLocation()
+  if (location.pathname.includes(path)) return { color: '#bef67a' }
+  else return { color: '#ffffff' }
+}
 
 const Menu = () => {
   const navigate = useNavigate()
@@ -47,6 +52,11 @@ const Menu = () => {
         )}
         {auth.isAuthenticated() && (
           <span>
+            {auth.isAuthenticated().user.seller && (
+              <Link to="/seller/shops">
+                <Button style={isPartActive('/seller/')}>My Shops</Button>
+              </Link>
+            )}
             <Link to={'/users/' + auth.isAuthenticated().user._id}>
               <Button
                 style={isActive('/users/' + auth.isAuthenticated().user._id)}
