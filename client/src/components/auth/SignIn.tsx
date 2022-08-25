@@ -51,6 +51,7 @@ const SignIn = () => {
 
   const { redirectToReferrer } = values
   if (redirectToReferrer) {
+    console.log(navigate(-1))
     navigate(-1)
   }
 

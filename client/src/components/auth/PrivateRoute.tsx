@@ -3,8 +3,8 @@ import { Navigate } from 'react-router-dom'
 
 import auth from './auth-helper'
 
-const PrivateRoute = ({ children }: { children: React.Component }) => {
-  auth.isAuthenticated() ? children : <Navigate to="/signin" />
+const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+  return auth.isAuthenticated() ? children : <Navigate to="/signin" replace />
 }
 
 export default PrivateRoute

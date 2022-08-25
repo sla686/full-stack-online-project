@@ -5,8 +5,10 @@ import HomePage from './core/HomePage'
 import Menu from './core/Menu'
 import Users from './user/Users'
 import Profile from './user/Profile'
+import EditProfile from './user/EditProfile'
 import SignUp from './user/SignUp'
 import SignIn from './auth/SignIn'
+import PrivateRoute from './auth/PrivateRoute'
 
 const MainRouter = () => {
   return (
@@ -18,6 +20,14 @@ const MainRouter = () => {
         <Route path="/users/:userId" element={<Profile />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route
+          path="/users/edit/:userId"
+          element={
+            <PrivateRoute>
+              <EditProfile />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="*"
           element={
