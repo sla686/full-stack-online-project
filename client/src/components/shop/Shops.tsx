@@ -35,7 +35,7 @@ const Shops = () => {
         <List dense>
           {shops.map((shop, i) => {
             return (
-              <Link to={'/shops/' + shop?._id} key={i}>
+              <Link to={'/shops/' + shop._id} key={i}>
                 <Divider />
                 <ListItem button>
                   <ListItemAvatar>

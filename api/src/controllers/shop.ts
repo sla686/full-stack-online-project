@@ -62,8 +62,7 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
 
 const listByOwner = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const shops = await ShopService.findByOwner(req.params.userId,
-    )
+    const shops = await ShopService.findByOwner(req.params.userId)
     res.json(shops)
   } catch (error) {
     if (error instanceof Error && error.name == 'ValidationError') {
@@ -74,4 +73,20 @@ const listByOwner = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export default { create, findAll, listByOwner }
+const readById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const shop = await ShopService.findById(req.params.shopId)
+    if (!shop)
+      return res.status(400).json({
+        error: 'Shop not found',
+      })
+    shop.image = undefined
+    return res.json(shop)
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Could not retrieve shop',
+    })
+  }
+}
+
+export default { create, findAll, listByOwner, readById }

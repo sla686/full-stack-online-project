@@ -11,8 +11,8 @@ router.route('/')
   .get(ShopController.findAll)
 
 //prettier-ignore
-// router.route('/:shopId')
-//   .get(ShopController.findById)
+router.route('/:shopId')
+  .get(ShopController.readById)
 
 router
   .route('/by/:userId')

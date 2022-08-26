@@ -55,4 +55,16 @@ const listByOwner = async (
   }
 }
 
-export { create, list, listByOwner }
+const read = async (params: { shopId: string }, signal: AbortSignal) => {
+  try {
+    const response = await fetch(`${URL}/shops/` + params.shopId, {
+      method: 'GET',
+      signal: signal,
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, list, listByOwner, read }

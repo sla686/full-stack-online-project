@@ -5,7 +5,10 @@ export interface Shop {
   description?: string
   created?: Date | string
   updated?: Date | string
-  owner: string
+  owner: {
+    _id: string
+    name: string
+  }
 }
 
 export interface ShopCreation extends FormData {

@@ -2,11 +2,14 @@ import { Document, Schema, Types, model } from 'mongoose'
 
 export type ShopDocument = Document & {
   name: string
-  image: Buffer
+  image?: Buffer
   description?: string
   updated?: Date
   created: Date
-  owner: Types.ObjectId
+  owner: {
+    _id: Types.ObjectId
+    name: string
+  }
 }
 
 // Mongoose version 6+ syntax!

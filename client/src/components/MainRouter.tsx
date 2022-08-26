@@ -12,6 +12,7 @@ import SignIn from './auth/SignIn'
 import NewShop from './shop/NewShop'
 import Shops from './shop/Shops'
 import MyShops from './shop/MyShops'
+import SingleShop from './shop/SingleShop'
 
 const MainRouter = () => {
   return (
@@ -26,7 +27,7 @@ const MainRouter = () => {
         <Route path="/signin" element={<SignIn />} />
 
         <Route path="/shops" element={<Shops />} />
-
+        <Route path="/shops/:shopId" element={<SingleShop />} />
         <Route
           path="/seller/shops/new"
           element={

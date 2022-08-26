@@ -90,7 +90,7 @@ const MyShops = () => {
                     secondary={shop?.description}
                   />
                   {auth.isAuthenticated().user &&
-                    auth.isAuthenticated().user._id == shop?.owner && (
+                    auth.isAuthenticated().user._id == shop?.owner._id && (
                       <ListItemSecondaryAction>
                         <Link
                           to={'/seller/orders/' + shop?.name + '/' + shop?._id}
