@@ -18,7 +18,7 @@ import Edit from '@mui/icons-material/Edit'
 import { Shop } from '../../types/shop'
 import auth from './../auth/auth-helper'
 import { listByOwner } from './api-shop'
-// import DeleteShop from './DeleteShop'
+import DeleteShop from './DeleteShop'
 
 const MyShops = () => {
   const [shops, setShops] = useState<Shop[]>([])
@@ -104,7 +104,7 @@ const MyShops = () => {
                             <Edit />
                           </IconButton>
                         </Link>
-                        {/* <DeleteShop shop={shop} onRemove={removeShop} /> */}
+                        <DeleteShop shop={shop} onRemove={removeShop} />
                       </ListItemSecondaryAction>
                     )}
                 </ListItem>

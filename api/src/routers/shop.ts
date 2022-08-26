@@ -36,9 +36,9 @@ router
     ShopController.update
   )
   .delete(
-    AuthController.requireSignin
-    // ShopController.isOwner,
-    // ShopController.remove
+    AuthController.requireSignin,
+    ShopController.isOwner,
+    ShopController.remove
   )
 
 // prettier-ignore

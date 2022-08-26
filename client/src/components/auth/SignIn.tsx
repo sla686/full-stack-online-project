@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -17,7 +17,7 @@ const SignIn = () => {
     email: '',
     password: '',
     error: '',
-    redirectToReferrer: false,
+    redirect: false,
   })
 
   const clickSubmit = () => {
@@ -31,13 +31,13 @@ const SignIn = () => {
       //   setValues({ ...values, error: data.error })
       // } else {
       //   auth.authenticate(data, () => {
-      //     setValues({ ...values, error: '', redirectToReferrer: true })
+      //     setValues({ ...values, error: '', redirect: true })
       //   })
       // }
       if (!data?.token)
         throw new Error('Something went wrong while obraining a token')
       auth.authenticate(data, () => {
-        setValues({ ...values, error: '', redirectToReferrer: true })
+        setValues({ ...values, error: '', redirect: true })
       })
     })
   }
@@ -47,12 +47,9 @@ const SignIn = () => {
       setValues({ ...values, [name]: event.target.value })
     }
 
-  const navigate = useNavigate()
-
-  const { redirectToReferrer } = values
-  if (redirectToReferrer) {
-    console.log(navigate(-1))
-    navigate(-1)
+  const { redirect } = values
+  if (redirect) {
+    return <Navigate to="/" />
   }
 
   return (

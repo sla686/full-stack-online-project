@@ -4,7 +4,7 @@ export type ShopDocument = Document & {
   name: string
   image?: Buffer
   description?: string
-  updated?: Date
+  updated?: Date | number
   created: Date
   owner: {
     _id: Types.ObjectId

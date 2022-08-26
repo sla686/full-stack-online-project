@@ -73,8 +73,8 @@ const update = async (
   shop: ShopCreation
 ) => {
   try {
-    const response = await fetch('/api/shops/' + params.shopId, {
-      method: 'PUT',
+    const response = await fetch(`${URL}/shops/` + params.shopId, {
+      method: 'PATCH',
       headers: {
         Accept: 'application/json',
         Authorization: 'Bearer ' + credentials.t,
@@ -87,4 +87,23 @@ const update = async (
   }
 }
 
-export { create, list, listByOwner, read, update }
+const remove = async (
+  params: { shopId: string },
+  credentials: { t: string }
+) => {
+  try {
+    const response = await fetch(`${URL}/shops/${params.shopId}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, list, listByOwner, read, update, remove }

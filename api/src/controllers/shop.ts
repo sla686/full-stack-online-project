@@ -103,10 +103,9 @@ const readById = async (req: Request, res: Response) => {
   }
 }
 
-const isOwner = (req: RequestAuth, res: Response, next: NextFunction) => {
-  console.log(req)
-  const isOwner =
-    req.body.shop && req.auth && req.body.shop.owner._id == req.auth._id
+const isOwner = async (req: RequestAuth, res: Response, next: NextFunction) => {
+  const shop = await ShopService.findById(req.params.shopId)
+  const isOwner = shop && req.auth && shop.owner._id == req.auth._id
   if (!isOwner) {
     return res.status(403).json({
       error: 'User is not authorized',
@@ -115,7 +114,7 @@ const isOwner = (req: RequestAuth, res: Response, next: NextFunction) => {
   next()
 }
 
-const update = (req: Request, res: Response, next: NextFunction) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   const form = formidable({ keepExtensions: true })
   form.parse(req, async (err, fields: Fields, files: Files) => {
     if (err) {
@@ -123,20 +122,18 @@ const update = (req: Request, res: Response, next: NextFunction) => {
         message: 'Photo could not be uploaded',
       })
     }
-    let shop = req.body.shop
+    let shop = await ShopService.findById(req.params.shopId)
     shop = extend(shop, fields)
     shop.updated = Date.now()
     if (files.image) {
       if (files.image instanceof Array) {
         shop.image = fs.readFileSync(files.image[0].filepath)
-        // shop.image.contentType = files.image.type
       } else {
         shop.image = fs.readFileSync(files.image.filepath)
       }
     }
     try {
-      const result = await shop.save()
-      res.json(result)
+      res.json(await shop.save())
     } catch (error) {
       if (error instanceof Error && error.name == 'ValidationError') {
         next(new BadRequestError('Invalid Request', error))
@@ -148,4 +145,25 @@ const update = (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-export default { create, findAll, listByOwner, readById, isOwner, update }
+const remove = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.json(await ShopService.remove(req.params.shopId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      console.log(error)
+      next(error)
+    }
+  }
+}
+
+export default {
+  create,
+  findAll,
+  listByOwner,
+  readById,
+  isOwner,
+  update,
+  remove,
+}

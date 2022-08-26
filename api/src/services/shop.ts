@@ -27,4 +27,8 @@ const findById = async (userId: string): Promise<ShopDocument> => {
   return foundUser
 }
 
-export default { create, findAll, findByOwner, findById }
+const remove = async (shopId: string) => {
+  return await Shop.deleteOne({ _id: shopId })
+}
+
+export default { create, findAll, findByOwner, findById, remove }
