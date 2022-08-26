@@ -35,4 +35,24 @@ const list = async (signal: AbortSignal) => {
   }
 }
 
-export { create, list }
+const listByOwner = async (
+  params: { userId: string },
+  credentials: { t: string },
+  signal: AbortSignal
+) => {
+  try {
+    const response = await fetch(`${URL}/shops/by/` + params.userId, {
+      method: 'GET',
+      signal: signal,
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, list, listByOwner }

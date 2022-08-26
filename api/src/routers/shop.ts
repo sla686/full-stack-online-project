@@ -22,11 +22,11 @@ router
     UserController.isSeller,
     ShopController.create
   )
-// .get(
-//   AuthController.requireSignin,
-//   AuthController.hasAuthorization,
-//   ShopController.listByOwner
-// )
+  .get(
+    AuthController.requireSignin,
+    AuthController.hasAuthorization,
+    ShopController.listByOwner
+  )
 
 router
   .route('/:shopId')

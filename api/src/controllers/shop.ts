@@ -60,4 +60,18 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export default { create, findAll }
+const listByOwner = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const shops = await ShopService.findByOwner(req.params.userId,
+    )
+    res.json(shops)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      next(error)
+    }
+  }
+}
+
+export default { create, findAll, listByOwner }

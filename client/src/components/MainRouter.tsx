@@ -11,6 +11,7 @@ import SignUp from './user/SignUp'
 import SignIn from './auth/SignIn'
 import NewShop from './shop/NewShop'
 import Shops from './shop/Shops'
+import MyShops from './shop/MyShops'
 
 const MainRouter = () => {
   return (
@@ -39,6 +40,14 @@ const MainRouter = () => {
           element={
             <PrivateRoute>
               <EditProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/seller/shops"
+          element={
+            <PrivateRoute>
+              <MyShops />
             </PrivateRoute>
           }
         />

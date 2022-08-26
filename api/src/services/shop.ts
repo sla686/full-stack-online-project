@@ -11,4 +11,8 @@ const findAll = async (): Promise<ShopDocument[]> => {
   return await Shop.find()
 }
 
-export default { create, findAll }
+const findByOwner = async (userId: string): Promise<ShopDocument[]> => {
+  return await Shop.find({ owner: userId }).populate('owner', '_id name')
+}
+
+export default { create, findAll, findByOwner }

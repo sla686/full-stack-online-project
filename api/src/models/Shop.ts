@@ -6,7 +6,7 @@ export type ShopDocument = Document & {
   description?: string
   updated?: Date
   created: Date
-  owner?: Types.ObjectId
+  owner: Types.ObjectId
 }
 
 // Mongoose version 6+ syntax!

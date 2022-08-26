@@ -5,7 +5,7 @@ export interface Shop {
   description?: string
   created?: Date | string
   updated?: Date | string
-  owner?: string
+  owner: string
 }
 
 export interface ShopCreation extends FormData {
