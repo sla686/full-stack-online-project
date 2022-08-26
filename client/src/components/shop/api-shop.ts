@@ -67,4 +67,24 @@ const read = async (params: { shopId: string }, signal: AbortSignal) => {
   }
 }
 
-export { create, list, listByOwner, read }
+const update = async (
+  params: { shopId: string },
+  credentials: { t: string },
+  shop: ShopCreation
+) => {
+  try {
+    const response = await fetch('/api/shops/' + params.shopId, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+      body: shop,
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, list, listByOwner, read, update }

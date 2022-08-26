@@ -33,7 +33,9 @@ const NewShop = () => {
 
   const handleChange =
     (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files ? event.target.files[0] : ''
+      const file = event.target.files
+        ? event.target.files[0]
+        : event.target.value
 
       const value = name === 'image' ? file : event.target.value
       setValues({ ...values, [name]: value })

@@ -31,9 +31,9 @@ router
 router
   .route('/:shopId')
   .patch(
-    AuthController.requireSignin
-    // ShopController.isOwner,
-    // ShopController.update
+    AuthController.requireSignin,
+    ShopController.isOwner,
+    ShopController.update
   )
   .delete(
     AuthController.requireSignin
