@@ -28,7 +28,7 @@ const MainRouter = () => {
         <Route path="/shops" element={<Shops />} />
 
         <Route
-          path="/seller/shop/new"
+          path="/seller/shops/new"
           element={
             <PrivateRoute>
               <NewShop />
