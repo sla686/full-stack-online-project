@@ -9,6 +9,8 @@ import Grid from '@mui/material/Grid'
 import { read } from './api-shop'
 import { Shop } from '../../types/shop'
 
+const URL = 'http://localhost:4000'
+
 const SingleShop = () => {
   const [shop, setShop] = useState<Shop>()
   const [products, setProducts] = useState([])
@@ -72,8 +74,9 @@ const SingleShop = () => {
   }, [shopId])
 
   const logoUrl = shop?._id
-    ? `/shops/logo/${shop._id}?${new Date().getTime()}`
-    : '/shops/defaultphoto'
+    ? // ? `/shops/logo/${shop._id}?${new Date().getTime()}`
+      `${URL}/api/v1/shops/logo/` + shop._id
+    : `${URL}/api/v1/shops/defaultphoto`
   return (
     <div>
       <Grid container spacing={8}>

@@ -26,6 +26,8 @@ interface EditShop {
   error: string
 }
 
+const URL = 'http://localhost:4000'
+
 const EditShop = () => {
   const [values, setValues] = useState<EditShop>({
     name: '',
@@ -97,8 +99,8 @@ const EditShop = () => {
     }
 
   const logoUrl = values.id
-    ? `/api/shops/logo/${values.id}?${new Date().getTime()}`
-    : '/api/shops/defaultphoto'
+    ? `${URL}/api/v1/shops/logo/${values.id}`
+    : `${URL}/api/v1/shops/defaultphoto`
 
   if (values.redirect) {
     return <Navigate to={'/seller/shops'} />

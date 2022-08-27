@@ -20,6 +20,8 @@ import auth from './../auth/auth-helper'
 import { listByOwner } from './api-shop'
 import DeleteShop from './DeleteShop'
 
+const URL = 'http://localhost:4000'
+
 const MyShops = () => {
   const [shops, setShops] = useState<Shop[]>([])
   const [redirectToSignin, setRedirectToSignin] = useState(false)
@@ -73,16 +75,15 @@ const MyShops = () => {
         <List dense>
           {shops.map((shop, i) => {
             return (
-              <Link to={'/shops/' + shop._id} key={i}>
+              <span key={i}>
                 <Divider />
                 <ListItem button>
                   <ListItemAvatar>
                     <Avatar
                       src={
-                        '/api/shops/logo/' +
-                        shop?._id +
-                        '?' +
-                        new Date().getTime()
+                        `${URL}/api/v1/shops/logo/` + shop._id
+                        // + '?' +
+                        // new Date().getTime()
                       }
                     />
                   </ListItemAvatar>
@@ -110,7 +111,7 @@ const MyShops = () => {
                     )}
                 </ListItem>
                 <Divider />
-              </Link>
+              </span>
             )
           })}
         </List>

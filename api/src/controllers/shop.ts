@@ -8,7 +8,8 @@ import Shop from '../models/Shop'
 import ShopService from '../services/shop'
 import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
-// import defaultImage from '../../client/public/images/default.png'
+
+// import defaultImage from '../images/default.png'
 
 // interface RequestOwner extends Request, Document {
 //   shop?: {
@@ -36,7 +37,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
       const foundUser = await UserService.findById(req.params.userId)
       shop.owner = foundUser._id
       if (files.image) {
-        console.log(files)
+        // console.log(files)
         if (files.image instanceof Array) {
           shop.image = fs.readFileSync(files.image[0].filepath)
           // shop.image.name =
@@ -158,6 +159,20 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const photo = async (req: Request, res: Response, next: NextFunction) => {
+  const shop = await ShopService.findById(req.params.shopId)
+  // console.log('Shop:', shop)
+  if (shop && shop?.image) {
+    res.set('Content-Type', 'image/png')
+    return res.send(shop.image)
+  }
+  next()
+}
+
+const defaultPhoto = (req: Request, res: Response) => {
+  return res.sendFile(process.cwd() + '/src/images/default.png')
+}
+
 export default {
   create,
   findAll,
@@ -166,4 +181,6 @@ export default {
   isOwner,
   update,
   remove,
+  photo,
+  defaultPhoto,
 }

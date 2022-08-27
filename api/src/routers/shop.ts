@@ -42,17 +42,17 @@ router
   )
 
 // prettier-ignore
-// router
-//   .route('/logo/:shopId')
-//   .get(
-//     ShopController.photo,
-//     ShopController.defaultPhoto
-//   )
+router
+  .route('/logo/:shopId')
+  .get(
+    ShopController.photo,
+    ShopController.defaultPhoto
+  )
 
 //prettier-ignore
-// router
-//   .route('/defaultphoto')
-//   .get(ShopController.defaultPhoto)
+router
+  .route('/defaultphoto')
+  .get(ShopController.defaultPhoto)
 
 // router.param('shopId', ShopController.shopByID)
 

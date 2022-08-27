@@ -11,6 +11,8 @@ import Divider from '@mui/material/Divider'
 import { list } from './api-shop'
 import { Shop } from '../../types/shop'
 
+const URL = 'http://localhost:4000'
+
 const Shops = () => {
   const [shops, setShops] = useState<Shop[]>([])
 
@@ -41,7 +43,9 @@ const Shops = () => {
                   <ListItemAvatar>
                     <Avatar
                       src={
-                        '/shops/logo/' + shop?._id + '?' + new Date().getTime()
+                        `${URL}/api/v1/shops/logo/` + shop._id
+                        // + '?' +
+                        // new Date().getTime()
                       }
                     />
                   </ListItemAvatar>
