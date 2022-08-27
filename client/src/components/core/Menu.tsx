@@ -30,50 +30,61 @@ const Menu = () => {
         <Typography variant="h6" color="inherit">
           MERN Online Shop
         </Typography>
-        <Link to="/">
-          <IconButton aria-label="Home" style={isActive('/')}>
-            <HomeIcon />
-          </IconButton>
-        </Link>
-        <Link to="/users">
-          <IconButton aria-label="Users" style={isActive('/users')}>
-            <GroupIcon />
-          </IconButton>
-        </Link>
-        {!auth.isAuthenticated() && (
-          <span>
-            <Link to="/signup">
-              <Button style={isActive('/signup')}>Sign up</Button>
-            </Link>
-            <Link to="/signin">
-              <Button style={isActive('/signin')}>Sign In</Button>
-            </Link>
-          </span>
-        )}
-        {auth.isAuthenticated() && (
-          <span>
-            {auth.isAuthenticated().user.seller && (
-              <Link to="/seller/shops">
-                <Button style={isPartActive('/seller/')}>My Shops</Button>
-              </Link>
+        <div>
+          <Link to="/">
+            <IconButton aria-label="Home" style={isActive('/')}>
+              <HomeIcon />
+            </IconButton>
+          </Link>
+          <Link to="/users">
+            <IconButton aria-label="Users" style={isActive('/users')}>
+              <GroupIcon />
+            </IconButton>
+          </Link>
+          <Link to="/shops">
+            <Button style={isActive('/shops')}>All Shops</Button>
+          </Link>
+        </div>
+        <div style={{ position: 'absolute', right: '10px' }}>
+          <span style={{ float: 'right' }}>
+            {!auth.isAuthenticated() && (
+              <span>
+                <Link to="/signup">
+                  <Button style={isActive('/signup')}>Sign up</Button>
+                </Link>
+                <Link to="/signin">
+                  <Button style={isActive('/signin')}>Sign In</Button>
+                </Link>
+              </span>
             )}
-            <Link to={'/users/' + auth.isAuthenticated().user._id}>
-              <Button
-                style={isActive('/users/' + auth.isAuthenticated().user._id)}
-              >
-                My Profile
-              </Button>
-            </Link>
-            <Button
-              color="inherit"
-              onClick={() => {
-                auth.clearJWT(() => navigate('/'))
-              }}
-            >
-              Sign out
-            </Button>
+            {auth.isAuthenticated() && (
+              <span>
+                {auth.isAuthenticated().user.seller && (
+                  <Link to="/seller/shops">
+                    <Button style={isPartActive('/seller/')}>My Shops</Button>
+                  </Link>
+                )}
+                <Link to={'/users/' + auth.isAuthenticated().user._id}>
+                  <Button
+                    style={isActive(
+                      '/users/' + auth.isAuthenticated().user._id
+                    )}
+                  >
+                    My Profile
+                  </Button>
+                </Link>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    auth.clearJWT(() => navigate('/'))
+                  }}
+                >
+                  Sign out
+                </Button>
+              </span>
+            )}
           </span>
-        )}
+        </div>
       </Toolbar>
     </AppBar>
   )
