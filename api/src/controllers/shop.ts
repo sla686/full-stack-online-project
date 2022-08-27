@@ -9,7 +9,6 @@ import ShopService from '../services/shop'
 import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
-// import defaultImage from '../images/default.png'
 
 // interface RequestOwner extends Request, Document {
 //   shop?: {
