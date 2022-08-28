@@ -66,6 +66,29 @@ const listByShop = async (req: Request, res: Response) => {
   }
 }
 
+const listLatest = async (req: Request, res: Response) => {
+  try {
+    const products = await ProductService.listLatest()
+    res.json(products)
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Could not retrieve products',
+    })
+  }
+}
+
+const listRelated = async (req: Request, res: Response) => {
+  try {
+    const product = await ProductService.findById(req.params.productId)
+    const products = await ProductService.listRelated(product)
+    res.json(products)
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Could not retrieve products',
+    })
+  }
+}
+
 const photo = async (req: Request, res: Response, next: NextFunction) => {
   const product = await ProductService.findById(req.params.productId)
   if (product && product?.image) {
@@ -85,4 +108,6 @@ export default {
   listByShop,
   photo,
   defaultPhoto,
+  listLatest,
+  listRelated,
 }

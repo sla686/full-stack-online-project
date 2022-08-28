@@ -15,6 +15,17 @@ router
     ProductController.create
   )
 
+// This is for the product suggestions, better user experience!
+// prettier-ignore
+router.route('/latest')
+  .get(ProductController.listLatest)
+
+// This is for the product suggestions, better user experience!
+// prettier-ignore
+router
+  .route('/related/:productId')
+  .get(ProductController.listRelated)
+
 // prettier-ignore
 router
   .route('/image/:productId')
