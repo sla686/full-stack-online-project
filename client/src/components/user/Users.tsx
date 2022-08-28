@@ -52,7 +52,7 @@ const Users = () => {
 
   return (
     <PaperStyle elevation={4}>
-      <TypographyStyle variant="h6">All Users</TypographyStyle>
+      <TypographyStyle variant="h4">All Users</TypographyStyle>
       <List dense>
         {users.map((item, i) => (
           <Link to={'/users/' + item._id} key={i}>

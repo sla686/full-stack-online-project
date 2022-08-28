@@ -13,18 +13,28 @@ import IconButton from '@mui/material/IconButton'
 import Person from '@mui/icons-material/Person'
 import Edit from '@mui/icons-material/Edit'
 
-// import ArrowForward from '@mui/icons-material/ArrowForward'
-import { useTheme } from '@mui/material/styles'
-
 import { read } from '../user/api-user'
 import auth from '../auth/auth-helper'
 import { User } from '../../types/user'
 import DeleteUser from './DeleteUser'
+import theme from '../../styles/theme'
+
+const styles = {
+  root: {
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(5),
+    textAlign: 'center',
+  },
+  title: {
+    margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}`,
+  },
+}
 
 const Profile = () => {
   const [user, setUser] = useState<User>()
   const [redirectToSignin, setRedirectToSignin] = useState(false)
-  const theme = useTheme()
   const { userId } = useParams()
 
   useEffect(() => {
@@ -55,21 +65,8 @@ const Profile = () => {
   }
 
   return (
-    <Paper
-      sx={{
-        maxWidth: 600,
-        margin: 'auto',
-        padding: theme.spacing(3),
-        marginTop: theme.spacing(5),
-      }}
-      elevation={4}
-    >
-      <Typography
-        sx={{
-          margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}`,
-        }}
-        variant="h6"
-      >
+    <Paper sx={styles.root} elevation={4}>
+      <Typography sx={styles.title} variant="h4">
         Profile
       </Typography>
       <List dense>

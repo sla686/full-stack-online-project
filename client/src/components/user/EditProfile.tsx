@@ -9,15 +9,49 @@ import Icon from '@mui/material/Icon'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
-
-// import { useTheme } from '@mui/material/styles'
+import { styled } from '@mui/system'
 
 import { read, update } from '../user/api-user'
 import auth from '../auth/auth-helper'
 import { User } from '../../types/user'
+import theme from '../../styles/theme'
+
+const styles = {
+  error: {
+    verticalAlign: 'middle',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+  submit: {
+    margin: 'auto',
+    marginBottom: theme.spacing(2),
+  },
+}
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  maxWidth: 600,
+  margin: 'auto',
+  textAlign: 'center',
+  marginTop: theme.spacing(5),
+  paddingBottom: theme.spacing(2),
+}))
+
+const Title = styled(Typography)(() => ({
+  margin: theme.spacing(2),
+}))
+
+const SellerTitle = styled(Typography)(() => ({
+  marginTop: theme.spacing(2),
+}))
+
+/* const StyledSwitch = styled(Switch)(() => ({
+  '&.Mui-checked': {},
+})) */
 
 const EditProfile = () => {
-  // const theme = useTheme()
   const [values, setValues] = useState({
     userId: '',
     name: '',
@@ -110,15 +144,16 @@ const EditProfile = () => {
   }
 
   return (
-    <Card>
+    <StyledCard>
       <CardContent>
-        <Typography variant="h6">Edit Profile</Typography>
+        <Title variant="h4">Edit Profile</Title>
         <TextField
           id="name"
           label="Name"
           value={values.name}
           onChange={handleChange('name')}
           margin="normal"
+          style={styles.textField}
         />
         <br />
         <TextField
@@ -128,6 +163,7 @@ const EditProfile = () => {
           value={values.email}
           onChange={handleChange('email')}
           margin="normal"
+          style={styles.textField}
         />
         <br />
         <TextField
@@ -137,8 +173,9 @@ const EditProfile = () => {
           value={values.password}
           onChange={handleChange('password')}
           margin="normal"
+          style={styles.textField}
         />
-        <Typography variant="subtitle1">Seller Account</Typography>
+        <SellerTitle variant="subtitle1">Seller Account</SellerTitle>
         <FormControlLabel
           control={<Switch checked={values.seller} onChange={handleCheck} />}
           label={values.seller ? 'Active' : 'Inactive'}
@@ -146,17 +183,24 @@ const EditProfile = () => {
         <br />{' '}
         {values.error && (
           <Typography component="p" color="error">
-            <Icon color="error">error</Icon>
+            <Icon color="error" style={styles.error}>
+              error
+            </Icon>
             {values.error}
           </Typography>
         )}
       </CardContent>
       <CardActions>
-        <Button color="primary" variant="contained" onClick={clickSubmit}>
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={clickSubmit}
+          style={styles.submit}
+        >
           Submit
         </Button>
       </CardActions>
-    </Card>
+    </StyledCard>
   )
 }
 
