@@ -9,7 +9,7 @@ import Search from '../product/Search'
 import { listLatest, listCategories } from '../product/api-product'
 import { Product } from '../../types/product'
 
-const DivOuter = styled('div')(({ theme }) => ({
+const DivOuter = styled('div')(() => ({
   flexGrow: 1,
   margin: 30,
 }))

@@ -6,6 +6,7 @@ import ShopController from '../controllers/shop'
 
 const router = express.Router()
 
+//For searching! Params required!
 // prettier-ignore
 router.route('/')
   .get(ProductController.findAll)

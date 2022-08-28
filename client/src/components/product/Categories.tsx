@@ -3,12 +3,53 @@ import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
+import Grid from '@mui/material/Grid'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
 import Icon from '@mui/material/Icon'
+import { styled } from '@mui/system'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 
 import { listSearch } from './api-product'
 import Products from './Products'
+import theme from '../../styles/theme'
+
+const styles = {
+  itemTitle: {
+    verticalAlign: 'middle',
+    lineHeight: 2.5,
+    textAlign: 'center',
+    fontSize: '1.35em',
+    margin: '0 4px 0 0',
+  },
+  card: {
+    margin: 'auto',
+    marginTop: 20,
+  },
+  title: {
+    padding: `${theme.spacing(3)} ${theme.spacing(2.5)} ${theme.spacing(2)}`,
+    backgroundColor: '#80808024',
+    fontSize: '1.1em',
+  },
+  icon: {
+    verticalAlign: 'sub',
+    color: '#738272',
+    fontSize: '0.9em',
+  },
+  link: {
+    color: '#4d6538',
+    textShadow: '0px 2px 12px #ffffff',
+    cursor: 'pointer',
+  },
+}
+
+const Root = styled('div')(({ theme }) => ({
+  // display: 'flex',
+  // flexWrap: 'wrap',
+  // justifyContent: 'space-around',
+  // overflow: 'hidden',
+  // background: theme.palette.background.paper,
+}))
 
 const Categories = ({ categories }: { categories: string[] }) => {
   const [products, setProducts] = useState([])
@@ -16,8 +57,6 @@ const Categories = ({ categories }: { categories: string[] }) => {
 
   useEffect(() => {
     const abortController = new AbortController()
-    const signal = abortController.signal
-
     listSearch({
       category: categories[0],
     }).then((data) => {
@@ -30,7 +69,7 @@ const Categories = ({ categories }: { categories: string[] }) => {
     return function cleanup() {
       abortController.abort()
     }
-  }, [])
+  }, [categories])
 
   const listbyCategory = (category: string) => () => {
     setSelected(category)
@@ -47,28 +86,33 @@ const Categories = ({ categories }: { categories: string[] }) => {
 
   return (
     <div>
-      <Card>
-        <Typography variant="subtitle1">Explore by category</Typography>
-        <div>
-          <ImageList cols={4}>
-            {categories.map((item, i) => (
-              <ImageListItem
-                key={i}
-                style={{
-                  height: '64px',
-                  backgroundColor:
-                    selected == item
-                      ? 'rgba(95, 139, 137, 0.56)'
-                      : 'rgba(95, 124, 139, 0.32)',
-                }}
-              >
-                <span onClick={listbyCategory(item)}>
-                  {item} <Icon>{selected == item && 'arrow_drop_down'}</Icon>
-                </span>
-              </ImageListItem>
-            ))}
-          </ImageList>
-        </div>
+      <Card style={styles.card}>
+        <Typography variant="subtitle1" style={styles.title}>
+          Explore by category
+        </Typography>
+        <Root>
+          <div className="categories">
+            <ul className="categories--items">
+              {categories.map((item, i) => (
+                <li className="categories--list">
+                  <span
+                    className="categories--list--item"
+                    key={i}
+                    onClick={listbyCategory(item)}
+                    style={{
+                      backgroundColor:
+                        selected == item
+                          ? 'rgba(95, 139, 137, 0.56)'
+                          : 'rgba(95, 124, 139, 0.32)',
+                    }}
+                  >
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Root>
         <Divider />
         <Products products={products} searched={false} />
       </Card>

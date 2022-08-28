@@ -10,8 +10,43 @@ import Divider from '@mui/material/Divider'
 
 import { list } from './api-shop'
 import { Shop } from '../../types/shop'
+import theme from '../../styles/theme'
+import { styled } from '@mui/system'
 
-const URL = 'http://localhost:4000'
+const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  root: {
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(3),
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+  },
+}
+
+const Title = styled(Typography)(({ theme }) => ({
+  margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}`,
+  textAlign: 'center',
+  fontSize: '1.2em',
+}))
+
+const ShopTitle = styled(Typography)(() => ({
+  fontSize: '1.2em',
+  marginBottom: '5px',
+}))
+
+const ShopDescription = styled(Typography)(() => ({
+  color: theme.palette.text.secondary,
+}))
+
+const Details = styled('div')(() => ({
+  padding: '24px',
+}))
 
 const Shops = () => {
   const [shops, setShops] = useState<Shop[]>([])
@@ -31,9 +66,9 @@ const Shops = () => {
     }
   }, [])
   return (
-    <div>
-      <Paper elevation={4}>
-        <Typography variant="subtitle1">All Shops</Typography>
+    <>
+      <Paper style={styles.root} elevation={4}>
+        <Title variant="h1">All Shops</Title>
         <List dense>
           {shops.map((shop, i) => {
             return (
@@ -42,25 +77,22 @@ const Shops = () => {
                 <ListItem button>
                   <ListItemAvatar>
                     <Avatar
+                      style={styles.avatar}
                       src={
-                        `${URL}/api/v1/shops/logo/` + shop._id
+                        `${URL}/shops/logo/` + shop._id
                         // + '?' +
                         // new Date().getTime()
                       }
                     />
                   </ListItemAvatar>
-                  <div>
-                    <Typography
-                      variant="subtitle1"
-                      component="h2"
-                      color="primary"
-                    >
+                  <Details>
+                    <ShopTitle variant="h3" color="primary">
                       {shop?.name}
-                    </Typography>
-                    <Typography variant="subtitle2" component="h4">
+                    </ShopTitle>
+                    <ShopDescription variant="subtitle1">
                       {shop?.description}
-                    </Typography>
-                  </div>
+                    </ShopDescription>
+                  </Details>
                 </ListItem>
                 <Divider />
               </Link>
@@ -68,7 +100,7 @@ const Shops = () => {
           })}
         </List>
       </Paper>
-    </div>
+    </>
   )
 }
 
