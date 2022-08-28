@@ -44,4 +44,8 @@ const listRelated = async (
     .exec()
 }
 
-export default { findById, create, findByShop, listLatest, listRelated }
+const remove = async (productId: string) => {
+  return await Product.deleteOne({ _id: productId })
+}
+
+export default { findById, create, findByShop, listLatest, listRelated, remove }

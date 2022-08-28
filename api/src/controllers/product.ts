@@ -122,6 +122,19 @@ const update = (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
+const remove = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.json(await ProductService.remove(req.params.productId))
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      console.log(error)
+      next(error)
+    }
+  }
+}
+
 const photo = async (req: Request, res: Response, next: NextFunction) => {
   const product = await ProductService.findById(req.params.productId)
   if (product && product?.image) {
@@ -138,6 +151,7 @@ const defaultPhoto = (req: Request, res: Response) => {
 export default {
   create,
   update,
+  remove,
   readById,
   listByShop,
   photo,

@@ -22,6 +22,11 @@ router
     ShopController.isOwner,
     ProductController.update
   )
+  .delete(
+    AuthController.requireSignin,
+    ShopController.isOwner,
+    ProductController.remove
+  )
 
 // This is for the product suggestions, better user experience!
 // prettier-ignore
