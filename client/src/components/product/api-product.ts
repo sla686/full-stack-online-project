@@ -1,4 +1,5 @@
 import { ProductCreation } from '../../types/product'
+import queryString from 'query-string'
 
 const URL = 'http://localhost:4000/api/v1'
 
@@ -121,4 +122,38 @@ const remove = async (
   }
 }
 
-export { create, listByShop, listLatest, listRelated, read, update, remove }
+const listSearch = async (params: object) => {
+  const query = queryString.stringify(params)
+  try {
+    const response = await fetch(`${URL}/products?` + query, {
+      method: 'GET',
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const listCategories = async (signal: AbortSignal) => {
+  try {
+    const response = await fetch(`${URL}/products/categories`, {
+      method: 'GET',
+      signal: signal,
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export {
+  create,
+  listByShop,
+  listLatest,
+  listRelated,
+  read,
+  update,
+  remove,
+  listSearch,
+  listCategories,
+}

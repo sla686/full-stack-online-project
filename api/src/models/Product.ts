@@ -1,7 +1,7 @@
 import { Document, Schema, Types, model } from 'mongoose'
 
 export type ProductDocument = Document & {
-  name: string
+  name: string | object
   image?: Buffer
   description?: string
   category: string

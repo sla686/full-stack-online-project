@@ -153,14 +153,20 @@ const listCategories = async (
   }
 }
 
+interface query {
+  name: string | object
+  category: string
+}
+
 const findAll = async (req: Request, res: Response, next: NextFunction) => {
-  const query = {
-    name: {},
+  const query: query = {
+    name: '',
     category: '',
   }
-  if (req.body.query.search)
+
+  if (req.body?.query?.search)
     query.name = { $regex: req.body.query.search, $options: 'i' }
-  if (req.body.query.category && req.body.query.category != 'All')
+  if (req.body?.query?.category && req.body?.query?.category != 'All')
     query.category = req.body.query.category
   try {
     const products = await ProductService.findByQuery(query)
