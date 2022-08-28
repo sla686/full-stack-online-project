@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import Grid from '@mui/material/Grid'
-// import { useTheme } from '@mui/material/styles'
 import { styled } from '@mui/system'
 
 import Suggestions from '../product/Suggestions'
@@ -15,7 +14,7 @@ const DivOuter = styled('div')(() => ({
 }))
 
 const HomePage = () => {
-  const [suggestionTitle, setSuggestionTitle] = useState('Latest Products')
+  const [suggestionTitle] = useState('Latest Products')
   const [categories, setCategories] = useState<string[]>([])
   const [suggestions, setSuggestions] = useState<Product[]>([])
 

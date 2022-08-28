@@ -13,7 +13,6 @@ import FileUpload from '@mui/icons-material/AddPhotoAlternate'
 
 import auth from './../auth/auth-helper'
 import { read, update } from './api-shop'
-import { Shop } from './../../types/shop'
 import MyProducts from './../product/MyProducts'
 import theme from '../../styles/theme'
 
