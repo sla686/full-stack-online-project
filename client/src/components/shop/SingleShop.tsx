@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
 
-import { read } from './api-shop'
+import { read, listByShop } from './api-shop'
 import { Shop } from '../../types/shop'
+import Products from '../product/Products'
 
 const URL = 'http://localhost:4000'
 
@@ -21,18 +22,18 @@ const SingleShop = () => {
     const abortController = new AbortController()
     const signal = abortController.signal
 
-    // listByShop(
-    //   {
-    //     shopId: shopId ?? '',
-    //   },
-    //   signal
-    // ).then((data) => {
-    //   if (data.error) {
-    //     setError(data.error)
-    //   } else {
-    //     setProducts(data)
-    //   }
-    // })
+    listByShop(
+      {
+        shopId: shopId ?? '',
+      },
+      signal
+    ).then((data) => {
+      if (data.error) {
+        setError(data.error)
+      } else {
+        setProducts(data)
+      }
+    })
     read(
       {
         shopId: shopId ?? '',
@@ -45,28 +46,6 @@ const SingleShop = () => {
         setShop(data)
       }
     })
-
-    return function cleanup() {
-      abortController.abort()
-    }
-  }, [shopId])
-
-  useEffect(() => {
-    const abortController = new AbortController()
-    const signal = abortController.signal
-
-    // listByShop(
-    //   {
-    //     shopId: shopId ?? '',
-    //   },
-    //   signal
-    // ).then((data) => {
-    //   if (data.error) {
-    //     setError(data.error)
-    //   } else {
-    //     setProducts(data)
-    //   }
-    // })
 
     return function cleanup() {
       abortController.abort()
@@ -101,7 +80,7 @@ const SingleShop = () => {
             <Typography variant="subtitle1" component="h2">
               Products
             </Typography>
-            {/* <Products products={products} searched={false} /> */}
+            <Products products={products} searched={false} />
           </Card>
         </Grid>
       </Grid>
