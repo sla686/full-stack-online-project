@@ -1,8 +1,8 @@
 {
-  "name": "full-stack-online-shop",
-  "version": "1.0.0",
+  "name": "backend-online-shop",
+  "version": "1.0.1",
   "private": true,
-  "description": "An online shop project",
+  "description": "A backend of the online shop project",
   "repository": {
     "type": "git",
     "url": "https://github.com/sla686/full-stack-online-shop"
