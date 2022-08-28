@@ -8,6 +8,7 @@ const router = express.Router()
 
 router
   .route('/by/:shopId')
+  .get(ProductController.listByShop)
   .post(
     AuthController.requireSignin,
     ShopController.isOwner,

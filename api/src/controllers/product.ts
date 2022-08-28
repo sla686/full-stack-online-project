@@ -46,7 +46,18 @@ const productByID = async (req: Request, res: Response) => {
       return res.status(400).json({
         error: 'Product not found',
       })
-    return res.json(product)
+    return res.status(200).json(product)
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Could not retrieve product',
+    })
+  }
+}
+
+const listByShop = async (req: Request, res: Response) => {
+  try {
+    const products = await ProductService.findByShop(req.params.shopId)
+    res.status(200).json(products)
   } catch (err) {
     return res.status(400).json({
       error: 'Could not retrieve product',
@@ -57,4 +68,5 @@ const productByID = async (req: Request, res: Response) => {
 export default {
   create,
   productByID,
+  listByShop,
 }

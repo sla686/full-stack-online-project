@@ -19,4 +19,10 @@ const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return await product.save()
 }
 
-export default { findById, create }
+const findByShop = async (shopId: string): Promise<ProductDocument[]> => {
+  return await Product.find({ shop: shopId })
+    .populate('shop', '_id name')
+    .select('-image')
+}
+
+export default { findById, create, findByShop }
