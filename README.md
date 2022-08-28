@@ -22,7 +22,6 @@ The project consists of:
 
 - React.js (17+)
 - React Router (6+)
-- Redux (toolkit)
 - Material-UI (5+)
 
 2. Backend:
@@ -46,8 +45,8 @@ _Note: more to be added!_
 
 ## Demo
 
-- Backend: [User Collection Example](https://backend-online-shop-sla686.herokuapp.com/api/v1/users)
 - Frontend: [Online Shop](https://fullstack-online-shop.netlify.app/)
+- Backend: [User Collection Example](https://backend-online-shop-sla686.herokuapp.com/api/v1/users)
 
 ## Installation
 
@@ -71,7 +70,9 @@ OR
 
 3. **_For /api folder only:_** Create '/api/.env' file with your enivronmental variables. Use '/api/.env.example' file as a template!
 
-4. Start the project in development mode
+4. **_For /client folder only:_** In each component and helper verify the URL you would like to use for backend (later I'm planning to use .env to simplify)
+
+5. Start the project in development mode
 
 - For /api
 
@@ -85,7 +86,7 @@ OR
   npm run start
 ```
 
-4. Testing (husky will also automatically execute the following command on commit)
+6. Testing (husky will also automatically execute the following command on commit)
 
 - For both /api and /client
 
@@ -93,7 +94,7 @@ OR
   npm run test
 ```
 
-5. If you wish to build the project and then start it:
+7. If you wish to build the project and then start it:
 
 - For /api
 
