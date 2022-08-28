@@ -16,6 +16,7 @@ import SingleShop from './shop/SingleShop'
 import EditShop from './shop/EditShop'
 import NewProduct from './product/NewProduct'
 import SingleProduct from './product/SingleProduct'
+import EditProduct from './product/EditProduct'
 
 const MainRouter = () => {
   return (
@@ -73,6 +74,15 @@ const MainRouter = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/seller/:shopId/:productId/edit"
+          element={
+            <PrivateRoute>
+              <EditProduct />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="*"
           element={

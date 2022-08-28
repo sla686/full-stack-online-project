@@ -76,4 +76,27 @@ const read = async (params: { productId: string }, signal: AbortSignal) => {
   }
 }
 
-export { create, listByShop, listLatest, listRelated, read }
+const update = async (
+  params: { shopId: string; productId: string },
+  credentials: { t: string },
+  product: ProductCreation
+) => {
+  try {
+    const response = await fetch(
+      `${URL}/products/` + params.shopId + '/' + params.productId,
+      {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + credentials.t,
+        },
+        body: product,
+      }
+    )
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listByShop, listLatest, listRelated, read, update }
