@@ -90,6 +90,38 @@ const listRelated = async (req: Request, res: Response) => {
   }
 }
 
+const update = (req: Request, res: Response, next: NextFunction) => {
+  const form = formidable({ keepExtensions: true })
+  form.parse(req, async (err, fields: Fields, files: Files) => {
+    if (err) {
+      return res.status(400).json({
+        message: 'Photo could not be uploaded',
+      })
+    }
+    let product = await ProductService.findById(req.params.productId)
+    product = extend(product, fields)
+    product.updated = Date.now()
+    if (files.image) {
+      if (files.image instanceof Array) {
+        product.image = fs.readFileSync(files.image[0].filepath)
+      } else {
+        product.image = fs.readFileSync(files.image.filepath)
+      }
+    }
+    try {
+      const result = await product.save()
+      res.json(result)
+    } catch (error) {
+      if (error instanceof Error && error.name == 'ValidationError') {
+        next(new BadRequestError('Invalid Request', error))
+      } else {
+        console.log(error)
+        next(error)
+      }
+    }
+  })
+}
+
 const photo = async (req: Request, res: Response, next: NextFunction) => {
   const product = await ProductService.findById(req.params.productId)
   if (product && product?.image) {
@@ -105,6 +137,7 @@ const defaultPhoto = (req: Request, res: Response) => {
 
 export default {
   create,
+  update,
   readById,
   listByShop,
   photo,

@@ -15,6 +15,14 @@ router
     ProductController.create
   )
 
+router
+  .route('/:shopId/:productId')
+  .patch(
+    AuthController.requireSignin,
+    ShopController.isOwner,
+    ProductController.update
+  )
+
 // This is for the product suggestions, better user experience!
 // prettier-ignore
 router
