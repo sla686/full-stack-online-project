@@ -15,7 +15,7 @@ import Divider from '@mui/material/Divider'
 import Edit from '@mui/icons-material/Edit'
 import AddBoxIcon from '@mui/icons-material/AddBox'
 
-// import DeleteProduct from './../product/DeleteProduct'
+import DeleteProduct from './../product/DeleteProduct'
 import { listByShop } from './../product/api-product'
 import { Product } from '../../types/product'
 
@@ -45,13 +45,12 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
     }
   }, [])
 
-  // Possible solution for removing the product
-  /*   const removeProduct = (product: Product) => {
+  const removeProduct = (product: Product) => {
     const updatedProducts = [...products]
     const index = updatedProducts.indexOf(product)
     updatedProducts.splice(index, 1)
     setProducts(updatedProducts)
-  } */
+  }
   return (
     <Card>
       <Typography variant="h3">
@@ -107,11 +106,11 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
                       <Edit />
                     </IconButton>
                   </Link>
-                  {/*                   <DeleteProduct
+                  <DeleteProduct
                     product={product}
-                    shopId={props.shopId}
+                    shopId={shopId}
                     onRemove={removeProduct}
-                  /> */}
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
               <Divider />

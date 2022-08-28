@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Navigate, Link } from 'react-router-dom'
-
 import Paper from '@mui/material/Paper'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -14,6 +13,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Edit from '@mui/icons-material/Edit'
+import AddBoxIcon from '@mui/icons-material/AddBox'
 
 import { Shop } from '../../types/shop'
 import auth from './../auth/auth-helper'
@@ -67,7 +67,10 @@ const MyShops = () => {
           <span>
             <Link to="/seller/shops/new">
               <Button color="primary" variant="contained">
-                <Icon>add_box</Icon> New Shop
+                <Icon>
+                  <AddBoxIcon />
+                </Icon>{' '}
+                New Shop
               </Button>
             </Link>
           </span>

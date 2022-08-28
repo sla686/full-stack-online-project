@@ -99,4 +99,26 @@ const update = async (
   }
 }
 
-export { create, listByShop, listLatest, listRelated, read, update }
+const remove = async (
+  params: { shopId: string; productId: string },
+  credentials: { t: string }
+) => {
+  try {
+    const response = await fetch(
+      `${URL}/products/` + params.shopId + '/' + params.productId,
+      {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + credentials.t,
+        },
+      }
+    )
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listByShop, listLatest, listRelated, read, update, remove }
