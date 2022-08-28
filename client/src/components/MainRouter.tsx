@@ -15,6 +15,7 @@ import MyShops from './shop/MyShops'
 import SingleShop from './shop/SingleShop'
 import EditShop from './shop/EditShop'
 import NewProduct from './product/NewProduct'
+import SingleProduct from './product/SingleProduct'
 
 const MainRouter = () => {
   return (
@@ -27,6 +28,8 @@ const MainRouter = () => {
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+
+        <Route path="/products/:productId" element={<SingleProduct />} />
 
         <Route path="/shops" element={<Shops />} />
         <Route path="/shops/:shopId" element={<SingleShop />} />

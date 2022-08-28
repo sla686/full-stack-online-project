@@ -15,13 +15,10 @@ router
     ProductController.create
   )
 
-// prettier-ignore
-router.route('/:productId')
-  .get(ProductController.readById)
-
 // This is for the product suggestions, better user experience!
 // prettier-ignore
-router.route('/latest')
+router
+  .route('/latest')
   .get(ProductController.listLatest)
 
 // This is for the product suggestions, better user experience!
@@ -29,6 +26,11 @@ router.route('/latest')
 router
   .route('/related/:productId')
   .get(ProductController.listRelated)
+
+// prettier-ignore
+router
+  .route('/:productId')
+  .get(ProductController.readById)
 
 // prettier-ignore
 router

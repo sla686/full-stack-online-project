@@ -64,4 +64,16 @@ const listRelated = async (
   }
 }
 
-export { create, listByShop, listLatest, listRelated }
+const read = async (params: { productId: string }, signal: AbortSignal) => {
+  try {
+    const response = await fetch(`${URL}/products/` + params.productId, {
+      method: 'GET',
+      signal: signal,
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listByShop, listLatest, listRelated, read }

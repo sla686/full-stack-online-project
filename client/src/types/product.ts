@@ -2,9 +2,9 @@ export interface Product {
   _id?: string
   name: string
   image?: Buffer
-  desciption?: string
+  description?: string
   category?: string
-  quantity?: number
+  quantity: number
   price?: number
   created: Date | string
   updated?: Date | string

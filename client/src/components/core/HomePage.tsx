@@ -20,7 +20,6 @@ const HomePage = () => {
     const signal = abortController.signal
 
     listLatest(signal).then((data) => {
-      console.log('something!')
       if (data.error) {
         console.log(data.error)
       } else {
