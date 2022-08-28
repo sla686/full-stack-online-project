@@ -1,7 +1,7 @@
 import { ShopCreation } from '../../types/shop'
 
-// const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
-const URL = 'http://localhost:4000/api/v1'
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+// const URL = 'http://localhost:4000/api/v1'
 
 const create = (
   params: { userId: string },
