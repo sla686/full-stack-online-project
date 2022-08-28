@@ -135,6 +135,46 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
+const listCategories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const products = await ProductService.listCategories()
+    res.json(products)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      console.log(error)
+      next(error)
+    }
+  }
+}
+
+const findAll = async (req: Request, res: Response, next: NextFunction) => {
+  const query = {
+    name: {},
+    category: '',
+  }
+  if (req.body.query.search)
+    query.name = { $regex: req.body.query.search, $options: 'i' }
+  if (req.body.query.category && req.body.query.category != 'All')
+    query.category = req.body.query.category
+  try {
+    const products = await ProductService.findByQuery(query)
+    res.json(products)
+  } catch (error) {
+    if (error instanceof Error && error.name == 'ValidationError') {
+      next(new BadRequestError('Invalid Request', error))
+    } else {
+      console.log(error)
+      next(error)
+    }
+  }
+}
+
 const photo = async (req: Request, res: Response, next: NextFunction) => {
   const product = await ProductService.findById(req.params.productId)
   if (product && product?.image) {
@@ -158,4 +198,6 @@ export default {
   defaultPhoto,
   listLatest,
   listRelated,
+  listCategories,
+  findAll,
 }

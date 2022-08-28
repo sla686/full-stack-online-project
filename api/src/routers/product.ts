@@ -6,6 +6,10 @@ import ShopController from '../controllers/shop'
 
 const router = express.Router()
 
+// prettier-ignore
+router.route('/')
+  .get(ProductController.findAll)
+
 router
   .route('/by/:shopId')
   .get(ProductController.listByShop)
@@ -27,6 +31,10 @@ router
     ShopController.isOwner,
     ProductController.remove
   )
+
+// prettier-ignore
+router.route('/categories')
+  .get(ProductController.listCategories)
 
 // This is for the product suggestions, better user experience!
 // prettier-ignore

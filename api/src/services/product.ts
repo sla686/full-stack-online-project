@@ -14,6 +14,18 @@ const findById = async (productId: string): Promise<ProductDocument> => {
   return foundProduct
 }
 
+const findByQuery = async (query: any): Promise<ProductDocument[]> => {
+  const foundProducts = await Product.find(query)
+    .populate('shop', '_id name')
+    .select('-image')
+    .exec()
+  if (!foundProducts) {
+    throw new NotFoundError('Products are not found')
+  }
+
+  return foundProducts
+}
+
 const create = async (product: ProductDocument): Promise<ProductDocument> => {
   return await product.save()
 }
@@ -48,4 +60,17 @@ const remove = async (productId: string) => {
   return await Product.deleteOne({ _id: productId })
 }
 
-export default { findById, create, findByShop, listLatest, listRelated, remove }
+const listCategories = async () => {
+  return await Product.distinct('category', {})
+}
+
+export default {
+  findById,
+  create,
+  findByShop,
+  listLatest,
+  listRelated,
+  listCategories,
+  remove,
+  findByQuery,
+}
