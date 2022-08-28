@@ -24,7 +24,7 @@ const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
 const styles = {
   root: {
-    maxWidth: 600,
+    maxWidth: 900,
     margin: 'auto',
     padding: theme.spacing(3),
     marginTop: theme.spacing(5),
@@ -95,8 +95,9 @@ const MyShops = () => {
               <span key={i}>
                 <Divider />
                 <ListItem>
-                  <ListItemAvatar>
+                  <ListItemAvatar sx={{ marginRight: '15px' }}>
                     <Avatar
+                      sx={{ width: '60px', height: '60px' }}
                       src={
                         `${URL}/shops/logo/` + shop._id
                         // + '?' +
@@ -105,19 +106,20 @@ const MyShops = () => {
                     />
                   </ListItemAvatar>
                   <ListItemText
+                    sx={{ paddingRight: '35px' }}
                     primary={shop?.name}
                     secondary={shop?.description}
                   />
                   {auth.isAuthenticated().user &&
                     auth.isAuthenticated().user._id == shop?.owner._id && (
-                      <ListItemSecondaryAction>
-                        <Link
+                      <ListItemSecondaryAction sx={{ right: 0 }}>
+                        {/* <Link
                           to={'/seller/orders/' + shop?.name + '/' + shop?._id}
                         >
                           <Button aria-label="Orders" color="primary">
                             View Orders
                           </Button>
-                        </Link>
+                        </Link> */}
                         <Link to={'/seller/shops/edit/' + shop?._id}>
                           <IconButton aria-label="Edit" color="primary">
                             <Edit />

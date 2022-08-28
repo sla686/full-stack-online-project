@@ -18,12 +18,13 @@ const styles = {
   },
   card: {
     margin: 'auto',
-    marginTop: 20,
+    marginTop: '20px',
   },
   title: {
     padding: `${theme.spacing(3)} ${theme.spacing(2.5)} ${theme.spacing(2)}`,
     backgroundColor: '#80808024',
-    fontSize: '1.1em',
+    fontSize: '1.75em',
+    // textAlign: 'center',
   },
   icon: {
     verticalAlign: 'sub',

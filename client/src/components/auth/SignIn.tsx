@@ -38,8 +38,15 @@ const styles = {
   },
 }
 
+interface SignIn {
+  email?: string
+  password?: string
+  error?: string
+  redirect: boolean
+}
+
 const SignIn = () => {
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<SignIn>({
     email: '',
     password: '',
     error: '',
@@ -52,20 +59,28 @@ const SignIn = () => {
       password: values.password || undefined,
     }
 
-    signin(user).then((data: UserAuth) => {
-      // if (data.error) {
-      //   setValues({ ...values, error: data.error })
-      // } else {
-      //   auth.authenticate(data, () => {
-      //     setValues({ ...values, error: '', redirect: true })
-      //   })
-      // }
-      if (!data?.token)
-        throw new Error('Something went wrong while obraining a token')
-      auth.authenticate(data, () => {
-        setValues({ ...values, error: '', redirect: true })
+    signin(user)
+      .then((data: UserAuth) => {
+        if (data.error) {
+          setValues({ ...values, error: data.error })
+        } else {
+          auth.authenticate(data, () => {
+            setValues({ ...values, error: '', redirect: true })
+          })
+        }
+        // if (!data?.token) {
+        //   setValues({ ...values, error: data.error })
+        //   throw new Error(
+        //     'Something went wrong while obraining a token, the user does not exist!'
+        //   )
+        // }
+        // auth.authenticate(data, () => {
+        //   setValues({ ...values, error: '', redirect: true })
+        // })
       })
-    })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   const handleChange =

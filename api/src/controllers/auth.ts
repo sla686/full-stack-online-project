@@ -13,7 +13,7 @@ const signin = async (req: Request, res: Response) => {
     })
 
     if (!user)
-      return res.status(401).json({
+      return res.status(404).json({
         error: 'User not found',
       })
 
@@ -53,7 +53,7 @@ const signin = async (req: Request, res: Response) => {
 const signout = async (req: Request, res: Response) => {
   res.clearCookie('t')
   return res.status(200).json({
-    message: 'signed out',
+    message: 'Signed out',
   })
 }
 

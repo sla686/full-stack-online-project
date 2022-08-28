@@ -21,6 +21,7 @@ export interface UserSignIn {
 
 export interface UserAuth extends Response {
   token: string
+  error?: string
 }
 
 export interface UserReducerState {

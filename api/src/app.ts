@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-import movieRouter from './routers/movie'
 import userRouter from './routers/user'
 import authRouter from './routers/auth'
 import shopRouter from './routers/shop'
@@ -47,7 +46,6 @@ app.use(
 )
 
 // Set up routers
-app.use('/api/v1/movies', movieRouter)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/shops', shopRouter)

@@ -35,7 +35,7 @@ const styles = {
     marginTop: theme.spacing(2),
   },
   cover: {
-    width: 110,
+    width: 200,
     height: 100,
     margin: '8px',
   },

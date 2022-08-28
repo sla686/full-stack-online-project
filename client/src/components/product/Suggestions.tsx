@@ -54,7 +54,8 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }))
 const Title = styled(Typography)(({ theme }) => ({
   margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}`,
-  fontSize: '1.1em',
+  fontSize: '1.75em',
+  // textAlign: 'center',
 }))
 const StyledCard = styled(Card)(() => ({
   width: '100%',

@@ -17,7 +17,7 @@ const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
 const styles = {
   root: {
-    maxWidth: 600,
+    maxWidth: 900,
     margin: 'auto',
     padding: theme.spacing(3),
     marginTop: theme.spacing(5),
