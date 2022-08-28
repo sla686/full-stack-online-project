@@ -8,7 +8,6 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import ListItemText from '@mui/material/ListItemText'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
-import Icon from '@mui/material/Icon'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
@@ -19,8 +18,25 @@ import { Shop } from '../../types/shop'
 import auth from './../auth/auth-helper'
 import { listByOwner } from './api-shop'
 import DeleteShop from './DeleteShop'
+import theme from '../../styles/theme'
 
-const URL = 'http://localhost:4000'
+const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  root: {
+    maxWidth: 600,
+    margin: 'auto',
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(5),
+  },
+  title: {
+    margin: `${theme.spacing(3)} 0 ${theme.spacing(3)}px ${theme.spacing(1)}`,
+    fontSize: '2em',
+  },
+  leftIcon: {
+    marginRight: '8px',
+  },
+}
 
 const MyShops = () => {
   const [shops, setShops] = useState<Shop[]>([])
@@ -60,16 +76,14 @@ const MyShops = () => {
   }
 
   return (
-    <div>
-      <Paper elevation={4}>
-        <Typography variant="subtitle1">
+    <>
+      <Paper sx={styles.root} elevation={4}>
+        <Typography sx={styles.title} variant="h2">
           Your Shops
-          <span>
+          <span style={{ float: 'right' }}>
             <Link to="/seller/shops/new">
               <Button color="primary" variant="contained">
-                <Icon>
-                  <AddBoxIcon />
-                </Icon>{' '}
+                <AddBoxIcon sx={styles.leftIcon} />
                 New Shop
               </Button>
             </Link>
@@ -84,7 +98,7 @@ const MyShops = () => {
                   <ListItemAvatar>
                     <Avatar
                       src={
-                        `${URL}/api/v1/shops/logo/` + shop._id
+                        `${URL}/shops/logo/` + shop._id
                         // + '?' +
                         // new Date().getTime()
                       }
@@ -119,7 +133,7 @@ const MyShops = () => {
           })}
         </List>
       </Paper>
-    </div>
+    </>
   )
 }
 

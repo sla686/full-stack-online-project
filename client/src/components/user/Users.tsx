@@ -21,6 +21,7 @@ const PaperStyle = styled(Paper)(({ theme }) => ({
   margin: 'auto',
   marginTop: theme.spacing(5),
   maxWidth: 600,
+  textAlign: 'center',
 }))
 
 const TypographyStyle = styled(Typography)(({ theme }) => ({
@@ -28,6 +29,7 @@ const TypographyStyle = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   marginLeft: 'auto',
   marginRight: 'auto',
+  fontSize: '2em',
 }))
 
 const Users = () => {

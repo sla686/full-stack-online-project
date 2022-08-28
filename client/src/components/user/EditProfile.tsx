@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
-import Icon from '@mui/material/Icon'
+import ErrorIcon from '@mui/icons-material/Error'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
@@ -183,9 +183,7 @@ const EditProfile = () => {
         <br />{' '}
         {values.error && (
           <Typography component="p" color="error">
-            <Icon color="error" style={styles.error}>
-              error
-            </Icon>
+            <ErrorIcon color="error" sx={styles.error} />
             {values.error}
           </Typography>
         )}

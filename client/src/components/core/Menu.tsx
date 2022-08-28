@@ -28,7 +28,7 @@ const Menu = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" color="inherit">
-          MERN Online Marketplace and Shops
+          Online Marketplace & Shops
         </Typography>
         <div>
           <Link to="/">

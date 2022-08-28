@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import Icon from '@mui/material/Icon'
+import ErrorIcon from '@mui/icons-material/Error'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
 import FileUpload from '@mui/icons-material/AddPhotoAlternate'
@@ -15,6 +15,7 @@ import auth from './../auth/auth-helper'
 import { read, update } from './api-shop'
 import { Shop } from './../../types/shop'
 import MyProducts from './../product/MyProducts'
+import theme from '../../styles/theme'
 
 interface EditShop {
   owner: string
@@ -26,7 +27,48 @@ interface EditShop {
   error: string
 }
 
-const URL = 'http://localhost:4000'
+const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+    margin: 30,
+  },
+  card: {
+    textAlign: 'center',
+    paddingBottom: theme.spacing(2),
+  },
+  title: {
+    margin: theme.spacing(2),
+    fontSize: '2em',
+  },
+  subheading: {
+    marginTop: theme.spacing(2),
+  },
+  error: {
+    verticalAlign: 'middle',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 400,
+  },
+  submit: {
+    margin: 'auto',
+    marginBottom: theme.spacing(2),
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60,
+    margin: 'auto',
+  },
+  input: {
+    display: 'none',
+  },
+  filename: {
+    marginLeft: '10px',
+  },
+}
 
 const EditShop = () => {
   const [values, setValues] = useState<EditShop>({
@@ -99,30 +141,31 @@ const EditShop = () => {
     }
 
   const logoUrl = values.id
-    ? `${URL}/api/v1/shops/logo/${values.id}`
-    : `${URL}/api/v1/shops/defaultphoto`
+    ? `${URL}/shops/logo/${values.id}`
+    : `${URL}/shops/defaultphoto`
 
   if (values.redirect) {
     return <Navigate to={'/seller/shops'} />
   }
 
   return (
-    <div>
+    <div style={styles.root}>
       <Grid container spacing={8}>
         <Grid item xs={6} sm={6}>
-          <Card>
+          <Card sx={styles.card}>
             <CardContent>
-              <Typography variant="subtitle1" component="h2">
+              <Typography variant="subtitle1" component="h2" sx={styles.title}>
                 Edit Shop
               </Typography>
               <br />
-              <Avatar src={logoUrl} />
+              <Avatar src={logoUrl} sx={styles.bigAvatar} />
               <br />
               <input
                 accept="image/*"
                 onChange={handleChange('image')}
                 id="icon-button-file"
                 type="file"
+                style={styles.input}
               />
               <label htmlFor="icon-button-file">
                 <Button variant="contained" component="span">
@@ -130,7 +173,9 @@ const EditShop = () => {
                   <FileUpload />
                 </Button>
               </label>{' '}
-              <span>{values.image ? values.image.name : ''}</span>
+              <span style={styles.filename}>
+                {values.image ? values.image.name : ''}
+              </span>
               <br />
               <TextField
                 id="name"
@@ -138,6 +183,7 @@ const EditShop = () => {
                 value={values.name}
                 onChange={handleChange('name')}
                 margin="normal"
+                sx={styles.textField}
               />
               <br />
               <TextField
@@ -148,6 +194,7 @@ const EditShop = () => {
                 value={values.description}
                 onChange={handleChange('description')}
                 margin="normal"
+                sx={styles.textField}
               />
               <br />
               <Typography variant="subtitle2" component="h4">
@@ -155,14 +202,19 @@ const EditShop = () => {
               </Typography>
               <br />
               {values.error && (
-                <Typography component="p" color="error">
-                  <Icon color="error">error</Icon>
+                <Typography component="p" color="error" sx={styles.subheading}>
+                  <ErrorIcon color="error" sx={styles.error} />
                   {values.error}
                 </Typography>
               )}
             </CardContent>
             <CardActions>
-              <Button color="primary" variant="contained" onClick={clickSubmit}>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={clickSubmit}
+                sx={styles.submit}
+              >
                 Update
               </Button>
             </CardActions>

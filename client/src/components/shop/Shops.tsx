@@ -32,11 +32,11 @@ const styles = {
 const Title = styled(Typography)(({ theme }) => ({
   margin: `${theme.spacing(3)} 0 ${theme.spacing(2)}`,
   textAlign: 'center',
-  fontSize: '1.2em',
+  fontSize: '2em',
 }))
 
 const ShopTitle = styled(Typography)(() => ({
-  fontSize: '1.2em',
+  fontSize: '1.6em',
   marginBottom: '5px',
 }))
 

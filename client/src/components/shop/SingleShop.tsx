@@ -10,8 +10,39 @@ import { read } from './api-shop'
 import { listByShop } from '../product/api-product'
 import { Shop } from '../../types/shop'
 import Products from '../product/Products'
+import theme from '../../styles/theme'
 
-const URL = 'http://localhost:4000'
+const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+    margin: 30,
+  },
+  card: {
+    textAlign: 'center',
+    paddingBottom: theme.spacing(2),
+  },
+  title: {
+    margin: theme.spacing(2),
+    fontSize: '2em',
+  },
+  subheading: {
+    marginTop: theme.spacing(1),
+  },
+  bigAvatar: {
+    width: 100,
+    height: 100,
+    margin: 'auto',
+  },
+  productTitle: {
+    padding: `${theme.spacing(3)} ${theme.spacing(2.5)} ${theme.spacing(
+      1
+    )} ${theme.spacing(2)}`,
+    width: '100%',
+    fontSize: '1.7em',
+  },
+}
 
 const SingleShop = () => {
   const [shop, setShop] = useState<Shop>()
@@ -54,23 +85,26 @@ const SingleShop = () => {
   }, [shopId])
 
   const logoUrl = shop?._id
-    ? // ? `/shops/logo/${shop._id}?${new Date().getTime()}`
-      `${URL}/api/v1/shops/logo/` + shop._id
-    : `${URL}/api/v1/shops/defaultphoto`
+    ? `${URL}/shops/logo/` + shop._id
+    : `${URL}/shops/defaultphoto`
 
   return (
-    <div>
+    <div style={styles.root}>
       <Grid container spacing={8}>
         <Grid item xs={4} sm={4}>
-          <Card>
+          <Card sx={styles.card}>
             <CardContent>
-              <Typography variant="subtitle1" component="h2">
+              <Typography sx={styles.title} variant="subtitle1" component="h1">
                 {shop?.name}
               </Typography>
               <br />
-              <Avatar src={logoUrl} />
+              <Avatar src={logoUrl} sx={styles.bigAvatar} />
               <br />
-              <Typography variant="subtitle2" component="h2">
+              <Typography
+                sx={styles.subheading}
+                variant="subtitle2"
+                component="h2"
+              >
                 {shop?.description}
               </Typography>
               <br />
@@ -79,7 +113,11 @@ const SingleShop = () => {
         </Grid>
         <Grid item xs={8} sm={8}>
           <Card>
-            <Typography variant="subtitle1" component="h2">
+            <Typography
+              sx={styles.productTitle}
+              variant="subtitle1"
+              component="h2"
+            >
               Products
             </Typography>
             <Products products={products} searched={false} />

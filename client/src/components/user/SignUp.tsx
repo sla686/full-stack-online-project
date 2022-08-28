@@ -6,7 +6,7 @@ import CardActions from '@mui/material/CardActions'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import Icon from '@mui/material/Icon'
+import ErrorIcon from '@mui/icons-material/Error'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -109,9 +109,7 @@ const SignUp = () => {
           <br />{' '}
           {values.error && (
             <Typography component="p" color="error">
-              <Icon color="error" sx={styles.error}>
-                error
-              </Icon>
+              <ErrorIcon color="error" sx={styles.error} />
               {values.error}
             </Typography>
           )}
