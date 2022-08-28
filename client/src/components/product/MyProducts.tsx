@@ -13,6 +13,7 @@ import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Edit from '@mui/icons-material/Edit'
+import AddBoxIcon from '@mui/icons-material/AddBox'
 
 // import DeleteProduct from './../product/DeleteProduct'
 import { listByShop } from './../product/api-product'
@@ -58,7 +59,10 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
         <span>
           <Link to={'/seller/' + shopId + '/products/new'}>
             <Button color="primary" variant="contained">
-              <Icon>add_box</Icon> New Product
+              <Icon>
+                <AddBoxIcon />
+              </Icon>{' '}
+              New Product
             </Button>
           </Link>
         </span>

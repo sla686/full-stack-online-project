@@ -34,4 +34,34 @@ const listByShop = async (params: { shopId: string }, signal: AbortSignal) => {
   }
 }
 
-export { create, listByShop }
+const listLatest = async (signal: AbortSignal) => {
+  try {
+    const response = await fetch(`${URL}/products/latest`, {
+      method: 'GET',
+      signal: signal,
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const listRelated = async (
+  params: { productId: string },
+  signal: AbortSignal
+) => {
+  try {
+    const response = await fetch(
+      `${URL}/products/related/` + params.productId,
+      {
+        method: 'GET',
+        signal: signal,
+      }
+    )
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export { create, listByShop, listLatest, listRelated }

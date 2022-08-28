@@ -6,7 +6,7 @@ export interface Product {
   category?: string
   quantity?: number
   price?: number
-  created?: Date | string
+  created: Date | string
   updated?: Date | string
   shop: {
     _id: string
