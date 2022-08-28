@@ -43,14 +43,6 @@ const styles = {
   },
 }
 
-const Root = styled('div')(({ theme }) => ({
-  // display: 'flex',
-  // flexWrap: 'wrap',
-  // justifyContent: 'space-around',
-  // overflow: 'hidden',
-  // background: theme.palette.background.paper,
-}))
-
 const Categories = ({ categories }: { categories: string[] }) => {
   const [products, setProducts] = useState([])
   const [selected, setSelected] = useState(categories[0])
@@ -85,19 +77,18 @@ const Categories = ({ categories }: { categories: string[] }) => {
   }
 
   return (
-    <div>
-      <Card style={styles.card}>
-        <Typography variant="subtitle1" style={styles.title}>
+    <>
+      <Card sx={styles.card}>
+        <Typography variant="subtitle1" sx={styles.title}>
           Explore by category
         </Typography>
-        <Root>
+        <div>
           <div className="categories">
             <ul className="categories--items">
               {categories.map((item, i) => (
-                <li className="categories--list">
+                <li className="categories--list" key={i}>
                   <span
                     className="categories--list--item"
-                    key={i}
                     onClick={listbyCategory(item)}
                     style={{
                       backgroundColor:
@@ -112,11 +103,11 @@ const Categories = ({ categories }: { categories: string[] }) => {
               ))}
             </ul>
           </div>
-        </Root>
+        </div>
         <Divider />
         <Products products={products} searched={false} />
       </Card>
-    </div>
+    </>
   )
 }
 Categories.propTypes = {

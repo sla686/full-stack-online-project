@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
-import Icon from '@mui/material/Icon'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
@@ -18,8 +16,33 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import DeleteProduct from './../product/DeleteProduct'
 import { listByShop } from './../product/api-product'
 import { Product } from '../../types/product'
+import theme from '../../styles/theme'
 
 const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  card: {
+    padding: '24px',
+  },
+  leftIcon: {
+    marginRight: '8px',
+  },
+  title: {
+    margin: theme.spacing(2),
+    fontSize: '2em',
+  },
+  subheading: {
+    marginTop: theme.spacing(2),
+  },
+  cover: {
+    width: 110,
+    height: 100,
+    margin: '8px',
+  },
+  details: {
+    padding: '10px',
+  },
+}
 
 const MyProducts = ({ shopId }: { shopId: string }) => {
   const [products, setProducts] = useState<Product[]>([])
@@ -52,15 +75,13 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
     setProducts(updatedProducts)
   }
   return (
-    <Card>
-      <Typography variant="h3">
+    <Card sx={styles.card}>
+      <Typography variant="h1" sx={styles.title}>
         Products
-        <span>
+        <span style={{ float: 'right' }}>
           <Link to={'/seller/' + shopId + '/products/new'}>
             <Button color="primary" variant="contained">
-              <Icon>
-                <AddBoxIcon />
-              </Icon>{' '}
+              <AddBoxIcon sx={styles.leftIcon} />
               New Product
             </Button>
           </Link>
@@ -72,6 +93,7 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
             <span key={i}>
               <ListItem>
                 <CardMedia
+                  sx={styles.cover}
                   image={
                     `${URL}/products/image/` +
                     product._id +
@@ -80,15 +102,20 @@ const MyProducts = ({ shopId }: { shopId: string }) => {
                   }
                   title={product.name}
                 />
-                <div>
+                <div style={styles.details}>
                   <Typography
                     variant="subtitle1"
                     component="h2"
                     color="primary"
+                    sx={styles.subheading}
                   >
                     {product.name}
                   </Typography>
-                  <Typography variant="subtitle2" component="h4">
+                  <Typography
+                    variant="subtitle2"
+                    component="h4"
+                    sx={styles.subheading}
+                  >
                     Quantity: {product.quantity} | Price: ${product.price}
                   </Typography>
                 </div>

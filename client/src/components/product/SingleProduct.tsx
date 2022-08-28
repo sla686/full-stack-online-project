@@ -8,13 +8,54 @@ import Icon from '@mui/material/Icon'
 import Grid from '@mui/material/Grid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
-// Possible new component for the cart
+// Possible name of the component for the cart
 /* import AddToCart from './../cart/AddToCart' */
 import Suggestions from './../product/Suggestions'
 import { read, listRelated } from './api-product'
 import { Product } from '../../types/product'
 
 const URL = 'http://localhost:4000/api/v1'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+    margin: 30,
+  },
+  flex: {
+    display: 'flex',
+  },
+  card: {
+    padding: '24px 40px 40px',
+  },
+  subheading: {
+    margin: '24px',
+  },
+  price: {
+    padding: '16px',
+    margin: '16px 0px',
+    display: 'flex',
+    backgroundColor: '#93c5ae3d',
+    fontSize: '1.3em',
+    color: '#375a53',
+  },
+  media: {
+    height: 200,
+    display: 'inline-block',
+    width: '50%',
+    marginLeft: '24px',
+  },
+  icon: {
+    verticalAlign: 'sub',
+  },
+  link: {
+    color: '#3e4c54b3',
+    fontSize: '0.9em',
+  },
+  action: {
+    margin: '8px 24px',
+    display: 'inline-block',
+  },
+}
 
 const SingleProduct = () => {
   const [product, setProduct] = useState<Product>({
@@ -75,35 +116,37 @@ const SingleProduct = () => {
     : `${URL}/products/defaultphoto`
 
   return (
-    <div>
+    <div style={styles.root}>
       <Grid container spacing={10}>
         <Grid item xs={7} sm={7}>
-          <Card>
+          <Card sx={styles.card}>
             <CardHeader
               title={product.name}
               subheader={product.quantity > 0 ? 'In Stock' : 'Out of Stock'}
               action={
-                <span>
-                  {/* <AddToCart cartStyle={classes.addCart} item={product} /> */}
-                  <p>Cart adding will be here</p>
+                <span style={styles.action}>
+                  <p>AddToCart will be placed here</p>
                 </span>
               }
             />
-            <div>
+            <div style={styles.flex}>
               <CardMedia
+                sx={styles.media}
                 component="img"
                 image={imageUrl}
                 title={product.name}
               />
-              <Typography component="p" variant="subtitle1">
+              <Typography
+                sx={styles.subheading}
+                component="p"
+                variant="subtitle1"
+              >
                 {product.description}
                 <br />
-                <span>$ {product.price}</span>
-                <Link to={'/shops/' + product.shop._id}>
+                <span style={styles.price}>$ {product.price}</span>
+                <Link to={'/shops/' + product.shop._id} style={styles.link}>
                   <span>
-                    <Icon>
-                      <ShoppingCartIcon />
-                    </Icon>{' '}
+                    <ShoppingCartIcon sx={styles.icon} />
                     {product.shop.name}
                   </span>
                 </Link>

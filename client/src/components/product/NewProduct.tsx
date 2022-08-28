@@ -6,11 +6,12 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import Icon from '@mui/material/Icon'
+import ErrorIcon from '@mui/icons-material/Error'
 import FileUpload from '@mui/icons-material/AddPhotoAlternate'
 
 import { create } from './api-product'
 import auth from './../auth/auth-helper'
+import theme from '../../styles/theme'
 
 interface NewProduct {
   name: string
@@ -21,6 +22,38 @@ interface NewProduct {
   price: string
   redirect: boolean
   error: string
+}
+
+const styles = {
+  card: {
+    maxWidth: 600,
+    margin: 'auto',
+    textAlign: 'center',
+    marginTop: theme.spacing(5),
+    paddingBottom: theme.spacing(2),
+  },
+  error: {
+    verticalAlign: 'middle',
+  },
+  title: {
+    marginTop: theme.spacing(2),
+    fontSize: '2em',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+  submit: {
+    margin: 'auto',
+    marginBottom: theme.spacing(2),
+  },
+  input: {
+    display: 'none',
+  },
+  filename: {
+    marginLeft: '10px',
+  },
 }
 
 const NewProduct = () => {
@@ -76,10 +109,10 @@ const NewProduct = () => {
     return <Navigate to={'/seller/shops/edit/' + shopId} />
   }
   return (
-    <div>
-      <Card>
+    <>
+      <Card sx={styles.card}>
         <CardContent>
-          <Typography variant="subtitle1" component="h2">
+          <Typography sx={styles.title} variant="h2" component="h2">
             New Product
           </Typography>
           <br />
@@ -88,14 +121,17 @@ const NewProduct = () => {
             onChange={handleChange('image')}
             id="icon-button-file"
             type="file"
+            style={styles.input}
           />
           <label htmlFor="icon-button-file">
             <Button variant="contained" color="secondary" component="span">
               Upload Logo
               <FileUpload />
             </Button>
-          </label>{' '}
-          <span>{values.image ? values.image.name : ''}</span>
+          </label>
+          <span style={styles.filename}>
+            {values.image ? values.image.name : ''}
+          </span>
           <br />
           <TextField
             id="name"
@@ -103,6 +139,7 @@ const NewProduct = () => {
             value={values.name}
             onChange={handleChange('name')}
             margin="normal"
+            sx={styles.textField}
           />
           <br />
           <TextField
@@ -113,6 +150,7 @@ const NewProduct = () => {
             value={values.description}
             onChange={handleChange('description')}
             margin="normal"
+            sx={styles.textField}
           />
           <br />
           <TextField
@@ -121,6 +159,7 @@ const NewProduct = () => {
             value={values.category}
             onChange={handleChange('category')}
             margin="normal"
+            sx={styles.textField}
           />
           <br />
           <TextField
@@ -130,6 +169,7 @@ const NewProduct = () => {
             onChange={handleChange('quantity')}
             type="number"
             margin="normal"
+            sx={styles.textField}
           />
           <br />
           <TextField
@@ -139,25 +179,31 @@ const NewProduct = () => {
             onChange={handleChange('price')}
             type="number"
             margin="normal"
+            sx={styles.textField}
           />
           <br />
           {values.error && (
             <Typography component="p" color="error">
-              <Icon color="error">error</Icon>
+              <ErrorIcon color="error" sx={styles.error} />
               {values.error}
             </Typography>
           )}
         </CardContent>
         <CardActions>
-          <Button color="primary" variant="contained" onClick={clickSubmit}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={clickSubmit}
+            sx={styles.submit}
+          >
             Submit
           </Button>
-          <Link to={'/seller/shops/edit/' + shopId}>
+          <Link to={'/seller/shops/edit/' + shopId} style={styles.submit}>
             <Button variant="contained">Cancel</Button>
           </Link>
         </CardActions>
       </Card>
-    </div>
+    </>
   )
 }
 

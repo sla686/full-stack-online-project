@@ -94,7 +94,7 @@ const MyShops = () => {
             return (
               <span key={i}>
                 <Divider />
-                <ListItem button>
+                <ListItem>
                   <ListItemAvatar>
                     <Avatar
                       src={
