@@ -15,4 +15,17 @@ router
     ProductController.create
   )
 
+// prettier-ignore
+router
+  .route('/image/:productId')
+  .get(
+    ProductController.photo,
+    ProductController.defaultPhoto
+  )
+
+//prettier-ignore
+router
+  .route('/defaultphoto')
+  .get(ProductController.defaultPhoto)
+
 export default router

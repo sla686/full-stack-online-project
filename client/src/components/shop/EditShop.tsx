@@ -14,7 +14,7 @@ import FileUpload from '@mui/icons-material/AddPhotoAlternate'
 import auth from './../auth/auth-helper'
 import { read, update } from './api-shop'
 import { Shop } from './../../types/shop'
-// import MyProducts from './../product/MyProducts'
+import MyProducts from './../product/MyProducts'
 
 interface EditShop {
   owner: string
@@ -169,8 +169,7 @@ const EditShop = () => {
           </Card>
         </Grid>
         <Grid item xs={6} sm={6}>
-          {/* <MyProducts shopId={shopId} /> */}
-          <p>My Products goes</p>
+          <MyProducts shopId={shopId ?? ''} />
         </Grid>
       </Grid>
     </div>

@@ -6,6 +6,7 @@ import fs from 'fs'
 import Product from '../models/Product'
 import { BadRequestError } from '../helpers/apiError'
 import ProductService from '../services/product'
+import ShopService from '../services/shop'
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const form = formidable({ keepExtensions: true })
@@ -17,7 +18,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     }
     const product = new Product(fields)
     try {
-      const foundShop = await ProductService.findById(req.params.productId)
+      const foundShop = await ShopService.findById(req.params.shopId)
       product.shop = foundShop._id
       if (files.image) {
         if (files.image instanceof Array) {
@@ -65,8 +66,23 @@ const listByShop = async (req: Request, res: Response) => {
   }
 }
 
+const photo = async (req: Request, res: Response, next: NextFunction) => {
+  const product = await ProductService.findById(req.params.productId)
+  if (product && product?.image) {
+    // res.set('Content-Type', req.product.image.contentType)
+    return res.status(200).send(product.image)
+  }
+  next()
+}
+
+const defaultPhoto = (req: Request, res: Response) => {
+  return res.status(200).sendFile(process.cwd() + '/src/images/default.png')
+}
+
 export default {
   create,
   productByID,
   listByShop,
+  photo,
+  defaultPhoto,
 }

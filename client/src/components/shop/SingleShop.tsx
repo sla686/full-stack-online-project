@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
 import Grid from '@mui/material/Grid'
 
-import { read, listByShop } from './api-shop'
+import { read } from './api-shop'
+import { listByShop } from '../product/api-product'
 import { Shop } from '../../types/shop'
 import Products from '../product/Products'
 
@@ -56,6 +57,7 @@ const SingleShop = () => {
     ? // ? `/shops/logo/${shop._id}?${new Date().getTime()}`
       `${URL}/api/v1/shops/logo/` + shop._id
     : `${URL}/api/v1/shops/defaultphoto`
+
   return (
     <div>
       <Grid container spacing={8}>

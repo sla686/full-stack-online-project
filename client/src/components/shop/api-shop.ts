@@ -8,7 +8,6 @@ const create = (
   credentials: { t: string },
   shop: ShopCreation
 ) => {
-  console.log('shop:', shop)
   return fetch(`${URL}/shops/by/` + params.userId, {
     method: 'POST',
     headers: {
@@ -106,16 +105,4 @@ const remove = async (
   }
 }
 
-const listByShop = async (params: { shopId: string }, signal: AbortSignal) => {
-  try {
-    const response = await fetch(`${URL}/products/by/` + params.shopId, {
-      method: 'GET',
-      signal: signal,
-    })
-    return response.json()
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-export { create, list, listByOwner, read, update, remove, listByShop }
+export { create, list, listByOwner, read, update, remove }

@@ -73,14 +73,14 @@ const NewProduct = () => {
   }
 
   if (values.redirect) {
-    return <Navigate to={'/seller/shop/edit/' + shopId} />
+    return <Navigate to={'/seller/shops/edit/' + shopId} />
   }
   return (
     <div>
       <Card>
         <CardContent>
           <Typography variant="subtitle1" component="h2">
-            New Shop
+            New Product
           </Typography>
           <br />
           <input
@@ -114,7 +114,33 @@ const NewProduct = () => {
             onChange={handleChange('description')}
             margin="normal"
           />
-          <br />{' '}
+          <br />
+          <TextField
+            id="category"
+            label="Category"
+            value={values.category}
+            onChange={handleChange('category')}
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="quantity"
+            label="Quantity"
+            value={values.quantity}
+            onChange={handleChange('quantity')}
+            type="number"
+            margin="normal"
+          />
+          <br />
+          <TextField
+            id="price"
+            label="Price"
+            value={values.price}
+            onChange={handleChange('price')}
+            type="number"
+            margin="normal"
+          />
+          <br />
           {values.error && (
             <Typography component="p" color="error">
               <Icon color="error">error</Icon>
@@ -126,7 +152,7 @@ const NewProduct = () => {
           <Button color="primary" variant="contained" onClick={clickSubmit}>
             Submit
           </Button>
-          <Link to="/seller/shops">
+          <Link to={'/seller/shops/edit/' + shopId}>
             <Button variant="contained">Cancel</Button>
           </Link>
         </CardActions>
