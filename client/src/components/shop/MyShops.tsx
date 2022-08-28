@@ -20,7 +20,7 @@ import { listByOwner } from './api-shop'
 import DeleteShop from './DeleteShop'
 import theme from '../../styles/theme'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1/'
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
 const styles = {
   root: {

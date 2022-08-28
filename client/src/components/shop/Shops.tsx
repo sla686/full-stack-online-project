@@ -13,7 +13,7 @@ import { Shop } from '../../types/shop'
 import theme from '../../styles/theme'
 import { styled } from '@mui/system'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1/'
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
 const styles = {
   root: {

@@ -18,7 +18,7 @@ import { listByShop } from './../product/api-product'
 import { Product } from '../../types/product'
 import theme from '../../styles/theme'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1/'
+const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
 const styles = {
   card: {
