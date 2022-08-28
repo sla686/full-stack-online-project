@@ -47,7 +47,7 @@ const styles = {
 const SingleShop = () => {
   const [shop, setShop] = useState<Shop>()
   const [products, setProducts] = useState([])
-  const [error, setError] = useState('')
+  const [, setError] = useState('')
   const { shopId } = useParams()
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import Icon from '@mui/material/Icon'
 import Grid from '@mui/material/Grid'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
@@ -66,7 +65,7 @@ const SingleProduct = () => {
     shop: { _id: '', name: '' },
   })
   const [suggestions, setSuggestions] = useState([])
-  const [error, setError] = useState('')
+  const [, setError] = useState('')
   const { productId } = useParams()
 
   useEffect(() => {
