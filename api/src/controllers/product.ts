@@ -40,13 +40,14 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-const productByID = async (req: Request, res: Response) => {
+const readById = async (req: Request, res: Response) => {
   try {
-    const product = await Product.findById(req.params.productId)
+    const product = await ProductService.findById(req.params.productId)
     if (!product)
       return res.status(400).json({
         error: 'Product not found',
       })
+    product.image = undefined
     return res.status(200).json(product)
   } catch (err) {
     return res.status(400).json({
@@ -104,7 +105,7 @@ const defaultPhoto = (req: Request, res: Response) => {
 
 export default {
   create,
-  productByID,
+  readById,
   listByShop,
   photo,
   defaultPhoto,
