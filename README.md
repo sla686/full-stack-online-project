@@ -2,13 +2,15 @@
 
 # Online Shop
 
-Online Shop is a fullstack project written with MERN stack and TypeScript. This is my first fullstack project I have ever done!
-Thanks to this project I have learned a lot about building a fullstack web application, as well as designing backend and frontend parts to coordinate with each other.
+'Online Marketplace & Shop' is a fullstack project written with MERN stack and TypeScript. This is my first fullstack project I have ever done!
+The purpose of this project was to learn about building a fullstack web application, as well as designing backend and frontend parts to coordinate with each other. I have drastically improved my vision of understanding how to create web applications! However, there is so much more to learn!
+
 The project is in active development and I am implementing more API endpoints as well as extending the UI.
 
 [About](#about) •
 [Demo](#demo) •
 [Installation](#installation) •
+[Endpoints](#endpoints) •
 [Author](#author) •
 [License](#license)
 
@@ -31,17 +33,6 @@ The project consists of:
 - MongoDB(mongoose 6+)
 
 Additionally, 'Jest' and 'mongodb-memory-server' are used for testing. 'JWTs' are used for authentication, and 'cookies' are used for authorization.
-
-### Endpoints
-
-- GET /api/v1/users - lists all users
-- POST /api/v1/users - creates a new user
-
-- GET /api/v1/users/:userId - get information about specified user
-- PATCH /api/v1/users/:userId - update information for specified user
-- DELETE /api/v1/users/:userId - delete specified user
-
-_Note: more to be added!_
 
 ## Demo
 
@@ -108,6 +99,57 @@ npm run start
 ```sh
 npm run build
 ```
+
+## Endpoints
+
+### Do not require authentication and authorization
+
+#### Users
+
+- GET /api/v1/users - lists all users
+- POST /api/v1/users - creates a new user
+
+#### Shops
+
+- GET /api/v1/shops - lists all shops
+- GET /api/v1/shops/:shopId - returns information about the specified shop
+- GET /api/v1/shops/logo/:shopId - returns logo of the specified shop
+
+#### Products
+
+- GET /api/v1/products/latest - lists the last added products
+- GET /api/v1/products/related/:productId - lists the related products from the same category
+- GET /api/v1/products/categories - lists categories
+- GET /api/v1/products - lists the products
+- GET /api/v1/products/:productId - returns information about the specified product
+- GET /api/v1/products/image/:productId - returns an image of the product
+- GET /api/v1/products/by/:shopId - returns an array of products offered by the specified shop
+
+#### Authentication/Authorization
+
+- POST /api/v1/signin - authentication sign in
+- GET /api/v1/signout - authentication sign out
+
+### Require authentication (token) and authorization
+
+#### Users
+
+- GET /api/v1/users/:userId - returns information about the specified user
+- PATCH /api/v1/users/:userId - updates the specified user
+- DELETE /api/v1/users/:userId - deletes the specified user
+
+#### Shops
+
+- POST /api/v1/shops/by/:userId - creates a new shop
+- GET /api/v1/shops/by/:userId - lists shops belonging to the user
+- PATCH /api/v1/shops/:shopId - updated the specified shop
+- DELETE /api/v1/shops/:shopId - deletes the specified shop
+
+#### Products
+
+- POST /api/v1/products/by/:shopId - creates a product for the specified shop
+- PATCH /api/v1/products/:shopId/:productId - updates the specified product
+- DELETE /api/v1/products/:shopId/:productId - deletes the specified product
 
 ## Author
 
