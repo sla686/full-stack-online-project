@@ -23,6 +23,7 @@ const styles = {
   },
   error: {
     verticalAlign: 'middle',
+    marginRight: '5px',
   },
   title: {
     marginTop: theme.spacing(2),
