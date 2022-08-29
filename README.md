@@ -1,6 +1,6 @@
 <div align="center">
 
-# Online Shop
+# Online Marketplace & Shop
 
 'Online Marketplace & Shop' is a fullstack project written with MERN stack and TypeScript. This is my first fullstack project I have ever done!
 The purpose of this project was to learn about building a fullstack web application, as well as designing backend and frontend parts to coordinate with each other. I have drastically improved my vision of understanding how to create web applications! However, there is so much more to learn!
