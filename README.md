@@ -39,6 +39,7 @@ Additionally, 'Jest' and 'mongodb-memory-server' are used for testing. 'JWTs' ar
 ## Demo
 
 - Frontend: [Online Shop](https://fullstack-online-shop.netlify.app/)
+- Credentials for the Test User profile: test@user.com / testuser
 - Backend: [User Collection Example](https://backend-online-shop-sla686.herokuapp.com/api/v1/users)
 
 ## Installation
