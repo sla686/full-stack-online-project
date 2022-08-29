@@ -18,7 +18,7 @@ export default function (
     status: error.name,
     statusCode: error.statusCode,
     message: error.message,
-    info: error.source?.message.startsWith('User validation failed')
+    error: error.source?.message.startsWith('User validation failed')
       ? error.source?.message.slice(24).replace(/^\w/, (c) => c.toUpperCase())
       : error.source?.message,
   })

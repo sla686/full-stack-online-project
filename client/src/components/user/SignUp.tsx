@@ -61,13 +61,28 @@ const SignUp = () => {
       email: values.email || undefined,
       password: values.password || undefined,
     }
-    create(user).then(() => {
-      // if (!data.ok) {
-      //   setValues({ ...values, error: data.statusText })
-      // } else {
-      //   setValues({ ...values, open: true, error: '' })
-      // }
-      setValues({ ...values, open: true, error: '' })
+    create(user).then((data) => {
+      console.log(data)
+      if (data.status === 'Bad Request') {
+        // const errorMessage = data.info.startsWith('Password')
+        //   ? data.info.slice(51).replace(/^\w/, (c: string) => c.toUpperCase())
+        //   : data.info
+        let errorMessage = ''
+        errorMessage = data.info.startsWith('Email')
+          ? 'Email is already being used!'
+          : data.info.startsWith('Password')
+          ? 'Password must be at least 6 characters!'
+          : data.info.startsWith('Name')
+          ? 'Name is required!'
+          : data.info.startsWith('Hashed_password')
+          ? 'Password is required!'
+          : data.info
+
+        setValues({ ...values, error: errorMessage })
+      } else {
+        setValues({ ...values, error: '', open: true })
+      }
+      // setValues({ ...values, open: true, error: '' })
     })
   }
 
