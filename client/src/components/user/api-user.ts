@@ -13,7 +13,6 @@ const create = async (user: UserCreation) => {
       },
       body: JSON.stringify(user),
     })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -26,7 +25,6 @@ const list = async (signal: AbortSignal) => {
       method: 'GET',
       signal: signal,
     })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -48,7 +46,6 @@ const read = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -70,7 +67,6 @@ const update = async (
       },
       body: JSON.stringify(user),
     })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -90,7 +86,6 @@ const remove = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)

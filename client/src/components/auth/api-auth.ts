@@ -14,7 +14,6 @@ const signin = async (user: UserSignIn) => {
       credentials: 'include',
       body: JSON.stringify(user),
     })
-    // if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)
@@ -24,7 +23,6 @@ const signin = async (user: UserSignIn) => {
 const signout = async () => {
   try {
     const response = await fetch(`${URL}/auth/signout/`, { method: 'GET' })
-    if (!response.ok) throw new Error(response.statusText)
     return await response.json()
   } catch (err) {
     console.log(err)

@@ -3,23 +3,24 @@ import { ShopCreation } from '../../types/shop'
 const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 // const URL = 'http://localhost:4000/api/v1'
 
-const create = (
+const create = async (
   params: { userId: string },
   credentials: { t: string },
   shop: ShopCreation
 ) => {
-  return fetch(`${URL}/shops/by/` + params.userId, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Bearer ' + credentials.t,
-    },
-    body: shop,
-  })
-    .then((response) => {
-      return response.json()
+  try {
+    const response = await fetch(`${URL}/shops/by/` + params.userId, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + credentials.t,
+      },
+      body: shop,
     })
-    .catch((err) => console.log(err))
+    return await response.json()
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 const list = async (signal: AbortSignal) => {
@@ -48,7 +49,7 @@ const listByOwner = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
-    return response.json()
+    return await response.json()
   } catch (err) {
     console.log(err)
   }
@@ -60,7 +61,7 @@ const read = async (params: { shopId: string }, signal: AbortSignal) => {
       method: 'GET',
       signal: signal,
     })
-    return response.json()
+    return await response.json()
   } catch (err) {
     console.log(err)
   }
@@ -80,7 +81,7 @@ const update = async (
       },
       body: shop,
     })
-    return response.json()
+    return await response.json()
   } catch (err) {
     console.log(err)
   }
@@ -99,7 +100,7 @@ const remove = async (
         Authorization: 'Bearer ' + credentials.t,
       },
     })
-    return response.json()
+    return await response.json()
   } catch (err) {
     console.log(err)
   }
