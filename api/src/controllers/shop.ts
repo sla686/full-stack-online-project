@@ -9,7 +9,6 @@ import ShopService from '../services/shop'
 import UserService from '../services/user'
 import { BadRequestError } from '../helpers/apiError'
 
-
 // interface RequestOwner extends Request, Document {
 //   shop?: {
 //     updated: number
@@ -91,7 +90,7 @@ const readById = async (req: Request, res: Response) => {
   try {
     const shop = await ShopService.findById(req.params.shopId)
     if (!shop)
-      return res.status(400).json({
+      return res.status(404).json({
         error: 'Shop not found',
       })
     shop.image = undefined

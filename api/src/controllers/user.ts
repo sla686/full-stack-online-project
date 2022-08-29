@@ -41,15 +41,13 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 // GET /users/:userId
-const findById = async (req: Request, res: Response, next: NextFunction) => {
+const findById = async (req: Request, res: Response) => {
   try {
     res.status(200).json(await UserService.findById(req.params.userId))
-  } catch (error) {
-    if (error instanceof Error && error.name == 'ValidationError') {
-      next(new BadRequestError('Invalid Request', error))
-    } else {
-      next(error)
-    }
+  } catch (err) {
+    return res.status(400).json({
+      error: 'Could not retrieve user',
+    })
   }
 }
 
