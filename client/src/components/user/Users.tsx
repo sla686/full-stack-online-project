@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
+// import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+// import IconButton from '@mui/material/IconButton'
+// import ArrowForward from '@mui/icons-material/ArrowForward'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar'
-import IconButton from '@mui/material/IconButton'
 import Person from '@mui/icons-material/Person'
-import ArrowForward from '@mui/icons-material/ArrowForward'
 import { styled } from '@mui/system'
 
 import { list } from '../user/api-user'
@@ -56,7 +56,7 @@ const Users = () => {
     <PaperStyle elevation={4}>
       <TypographyStyle variant="h4">All Users</TypographyStyle>
       <List dense>
-        {users.map((item, i) => (
+        {users.map((item) => (
           // <Link to={'/users/' + item._id} key={i}>
           <ListItem>
             <ListItemAvatar>
