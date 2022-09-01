@@ -57,21 +57,21 @@ const Users = () => {
       <TypographyStyle variant="h4">All Users</TypographyStyle>
       <List dense>
         {users.map((item, i) => (
-          <Link to={'/users/' + item._id} key={i}>
-            <ListItem button>
-              <ListItemAvatar>
-                <Avatar>
-                  <Person />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={item.name} />
-              <ListItemSecondaryAction>
-                <IconButton>
-                  <ArrowForward />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </Link>
+          // <Link to={'/users/' + item._id} key={i}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <Person />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={item.name} />
+            {/* <ListItemSecondaryAction>
+              <IconButton>
+                <ArrowForward />
+              </IconButton>
+            </ListItemSecondaryAction> */}
+          </ListItem>
+          // </Link>
         ))}
       </List>
     </PaperStyle>
