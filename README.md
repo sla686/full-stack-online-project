@@ -1,6 +1,6 @@
 <div align="center">
 
-# Online Marketplace & Shop
+# Marketplace & Shops
 
 <img align="center" alt="Front End Screenshot" src="./FrontEndScreenshot.png" />
 
