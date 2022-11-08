@@ -8,24 +8,15 @@ on:
     branches: [ "dev" ]
 
 jobs:
-  build:
-
+  changes:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v3
     
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
+    # Set job outputs to values from filter step
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+
+    steps:   
     - uses: dorny/paths-filter@v2
       id: filter
       with:
@@ -35,21 +26,48 @@ jobs:
           frontend:
             - 'client/**'
             
-    # run only if 'backend' files were changed
-    - name: backend tests
-      if: steps.filter.outputs.backend == 'true'
-      working-directory: 'api'
-      run: | 
-        npm run lint
-        npm run test
-        npm run build
-
-    # run only if 'frontend' files were changed
-    - name: frontend tests
-      if: steps.filter.outputs.frontend == 'true'
-      working-directory: 'client'
-      run: |     
-        npm run lint
-        npm run test
-        npm run build
+  # JOB to build and test backend code
+  backend:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+      
+  # JOB to build and test frontend code
+  frontend:
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - run: npm run test
+      - run: npm run build
 
