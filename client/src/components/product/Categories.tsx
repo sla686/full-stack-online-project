@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider'
 
 import { listSearch } from './api-product'
 import Products from './Products'
+import Spinner from '../Spinner'
 import theme from '../../styles/theme'
 
 const styles = {
@@ -41,6 +42,8 @@ const styles = {
 const Categories = ({ categories }: { categories: string[] }) => {
   const [products, setProducts] = useState([])
   const [selected, setSelected] = useState(categories[0])
+  const [loadingCat, setLoadingCat] = useState(true)
+  const [loadingProd, setLoadingProd] = useState(true)
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -50,6 +53,8 @@ const Categories = ({ categories }: { categories: string[] }) => {
       if (data.error) {
         console.log(data.error)
       } else {
+        setLoadingCat(false)
+        setLoadingProd(false)
         setProducts(data)
       }
     })
@@ -59,6 +64,7 @@ const Categories = ({ categories }: { categories: string[] }) => {
   }, [categories])
 
   const listbyCategory = (category: string) => () => {
+    setLoadingProd(true)
     setSelected(category)
     listSearch({
       category: category,
@@ -66,6 +72,7 @@ const Categories = ({ categories }: { categories: string[] }) => {
       if (data.error) {
         console.log(data.error)
       } else {
+        setLoadingProd(false)
         setProducts(data)
       }
     })
@@ -78,29 +85,37 @@ const Categories = ({ categories }: { categories: string[] }) => {
           Explore by category
         </Typography>
         <div>
-          <div className="categories">
-            <ul className="categories--items">
-              {categories.map((item, i) => (
-                <li className="categories--list" key={i}>
-                  <span
-                    className="categories--list--item"
-                    onClick={listbyCategory(item)}
-                    style={{
-                      backgroundColor:
-                        selected == item
-                          ? 'rgba(95, 139, 137, 0.56)'
-                          : 'rgba(95, 124, 139, 0.32)',
-                    }}
-                  >
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {loadingCat ? (
+            <Spinner />
+          ) : (
+            <div className="categories">
+              <ul className="categories--items">
+                {categories.map((item, i) => (
+                  <li className="categories--list" key={i}>
+                    <span
+                      className="categories--list--item"
+                      onClick={listbyCategory(item)}
+                      style={{
+                        backgroundColor:
+                          selected == item
+                            ? 'rgba(95, 139, 137, 0.56)'
+                            : 'rgba(95, 124, 139, 0.32)',
+                      }}
+                    >
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <Divider />
+          {loadingProd ? (
+            <Spinner />
+          ) : (
+            <Products products={products} searched={false} />
+          )}
         </div>
-        <Divider />
-        <Products products={products} searched={false} />
       </Card>
     </>
   )

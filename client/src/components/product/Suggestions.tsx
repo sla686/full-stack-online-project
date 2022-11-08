@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Paper from '@mui/material/Paper'
@@ -14,6 +14,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { styled } from '@mui/system'
 
 import { Product } from '../../types/product'
+import Spinner from '../Spinner'
 
 const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
@@ -73,10 +74,13 @@ const Suggestions = ({
   products: Product[]
   title: string
 }) => {
+  const [loaded, setLoaded] = useState(false)
+
   return (
     <div>
       <StyledPaper elevation={4}>
         <Title variant="h2">{title}</Title>
+        {loaded ? null : <Spinner />}
         {products.map((item, i) => {
           return (
             <span key={i}>
@@ -85,7 +89,8 @@ const Suggestions = ({
                   component="img"
                   src={`${URL}/products/image/` + item._id}
                   title={item.name}
-                  style={styles.cardMedia}
+                  style={loaded ? styles.cardMedia : { display: 'none' }}
+                  onLoad={() => setLoaded(true)}
                 />
                 <Details>
                   <CardContent style={styles.cardContent}>

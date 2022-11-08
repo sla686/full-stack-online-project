@@ -10,6 +10,7 @@ import { styled } from '@mui/system'
 
 import { listSearch } from './api-product'
 import Products from './Products'
+import Spinner from '../Spinner'
 import theme from '../../styles/theme'
 
 const styles = {
@@ -51,6 +52,8 @@ const Search = ({ categories }: { categories: string[] }) => {
     results: [],
     searched: false,
   })
+  const [loading, setLoading] = useState(false)
+
   const handleChange =
     (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
       setValues({
@@ -60,6 +63,7 @@ const Search = ({ categories }: { categories: string[] }) => {
     }
   const search = () => {
     if (values.search) {
+      setLoading(true)
       listSearch({
         search: values.search || undefined,
         category: values.category,
@@ -68,6 +72,7 @@ const Search = ({ categories }: { categories: string[] }) => {
           console.log(data.error)
         } else {
           setValues({ ...values, results: data, searched: true })
+          setLoading(false)
         }
       })
     }
@@ -117,7 +122,11 @@ const Search = ({ categories }: { categories: string[] }) => {
           <SearchIcon />
         </Button>
         <Divider />
-        <Products products={values.results} searched={values.searched} />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Products products={values.results} searched={values.searched} />
+        )}
       </StyledCard>
     </div>
   )

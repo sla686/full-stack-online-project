@@ -2,7 +2,7 @@
   "name": "fronend-online-shop",
   "version": "1.0.1",
   "private": true,
-  "description": "A frontend pf the online shop project",
+  "description": "A frontend for the online shop project",
   "repository": {
     "type": "git",
     "url": "https://github.com/sla686/full-stack-online-shop"

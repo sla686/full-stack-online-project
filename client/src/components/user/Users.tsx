@@ -15,6 +15,7 @@ import { styled } from '@mui/system'
 
 import { list } from '../user/api-user'
 import { User } from '../../types/user.js'
+import Spinner from '../Spinner'
 
 const PaperStyle = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -34,6 +35,7 @@ const TypographyStyle = styled(Typography)(({ theme }) => ({
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -44,6 +46,7 @@ const Users = () => {
         console.log(data.error)
       } else {
         setUsers(data)
+        setLoading(false)
       }
     })
 
@@ -55,25 +58,29 @@ const Users = () => {
   return (
     <PaperStyle elevation={4}>
       <TypographyStyle variant="h4">All Users</TypographyStyle>
-      <List dense>
-        {users.map((item) => (
-          // <Link to={'/users/' + item._id} key={i}>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <Person />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={item.name} />
-            {/* <ListItemSecondaryAction>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <List dense>
+          {users.map((item) => (
+            // <Link to={'/users/' + item._id} key={i}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>
+                  <Person />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={item.name} />
+              {/* <ListItemSecondaryAction>
               <IconButton>
                 <ArrowForward />
               </IconButton>
             </ListItemSecondaryAction> */}
-          </ListItem>
-          // </Link>
-        ))}
-      </List>
+            </ListItem>
+            // </Link>
+          ))}
+        </List>
+      )}
     </PaperStyle>
   )
 }

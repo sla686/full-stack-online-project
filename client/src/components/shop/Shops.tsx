@@ -12,6 +12,7 @@ import { list } from './api-shop'
 import { Shop } from '../../types/shop'
 import theme from '../../styles/theme'
 import { styled } from '@mui/system'
+import Spinner from '../Spinner'
 
 const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
 
@@ -50,6 +51,7 @@ const Details = styled('div')(() => ({
 
 const Shops = () => {
   const [shops, setShops] = useState<Shop[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -59,6 +61,7 @@ const Shops = () => {
         console.log(data.error)
       } else {
         setShops(data)
+        setLoading(false)
       }
     })
     return function cleanup() {
@@ -69,36 +72,40 @@ const Shops = () => {
     <>
       <Paper style={styles.root} elevation={4}>
         <Title variant="h1">All Shops</Title>
-        <List dense>
-          {shops.map((shop, i) => {
-            return (
-              <Link to={'/shops/' + shop._id} key={i}>
-                <Divider />
-                <ListItem button>
-                  <ListItemAvatar>
-                    <Avatar
-                      style={styles.avatar}
-                      src={
-                        `${URL}/shops/logo/` + shop._id
-                        // + '?' +
-                        // new Date().getTime()
-                      }
-                    />
-                  </ListItemAvatar>
-                  <Details>
-                    <ShopTitle variant="h3" color="primary">
-                      {shop?.name}
-                    </ShopTitle>
-                    <ShopDescription variant="subtitle1">
-                      {shop?.description}
-                    </ShopDescription>
-                  </Details>
-                </ListItem>
-                <Divider />
-              </Link>
-            )
-          })}
-        </List>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <List dense>
+            {shops.map((shop, i) => {
+              return (
+                <Link to={'/shops/' + shop._id} key={i}>
+                  <Divider />
+                  <ListItem button>
+                    <ListItemAvatar>
+                      <Avatar
+                        style={styles.avatar}
+                        src={
+                          `${URL}/shops/logo/` + shop._id
+                          // + '?' +
+                          // new Date().getTime()
+                        }
+                      />
+                    </ListItemAvatar>
+                    <Details>
+                      <ShopTitle variant="h3" color="primary">
+                        {shop?.name}
+                      </ShopTitle>
+                      <ShopDescription variant="subtitle1">
+                        {shop?.description}
+                      </ShopDescription>
+                    </Details>
+                  </ListItem>
+                  <Divider />
+                </Link>
+              )
+            })}
+          </List>
+        )}
       </Paper>
     </>
   )
