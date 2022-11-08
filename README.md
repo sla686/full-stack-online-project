@@ -9,6 +9,10 @@ The purpose of this project was to learn about building a fullstack web applicat
 
 The project is in active development and I am implementing more API endpoints as well as extending the UI.
 
+[![Node.js CI](https://github.com/sla686/full-stack-online-shop-public/actions/workflows/node.js.yml/badge.svg)](https://github.com/sla686/full-stack-online-shop-public/actions/workflows/node.js.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+
 [About](#about) •
 [Demo](#demo) •
 [Installation](#installation) •
