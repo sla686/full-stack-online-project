@@ -46,6 +46,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: 'api/package-lock.json'
           
       - run: npm run lint
       - run: npm run test
@@ -69,7 +70,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: 'client/package-lock.json'
           
+      - run: npm run lint
       - run: npm run test
       - run: npm run build
 
