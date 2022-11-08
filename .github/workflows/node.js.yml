@@ -60,7 +60,7 @@ jobs:
   # JOB to build and test frontend code
   frontend:
     needs: changes
-    if: ${{ needs.changes.outputs.frontend == 'false' }}
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-latest
 
     defaults:
