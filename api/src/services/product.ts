@@ -1,5 +1,3 @@
-import mongoose from 'mongoose'
-
 import Product, { ProductDocument } from '../models/Product'
 import { NotFoundError, BadRequestError } from '../helpers/apiError'
 
