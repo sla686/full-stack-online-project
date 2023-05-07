@@ -1,6 +1,6 @@
 import { UserSignIn } from '../../types/user'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+const URL = 'https://backend-online-shop-sla686.netlify.app/api/v1'
 // const URL = 'http://localhost:4000/api/v1'
 
 const signin = async (user: UserSignIn) => {
