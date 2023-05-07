@@ -1,6 +1,6 @@
 import { User, UserCreation } from '../../types/user'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+const URL = 'https://backend-online-shop-sla686.up.railway.app/api/v1'
 
 const create = async (user: UserCreation) => {
   console.log('body:', JSON.stringify(user))

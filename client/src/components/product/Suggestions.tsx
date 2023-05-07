@@ -16,7 +16,7 @@ import { styled } from '@mui/system'
 import { Product } from '../../types/product'
 import Spinner from '../Spinner'
 
-const URL = 'https://backend-online-shop-sla686.herokuapp.com/api/v1'
+const URL = 'https://backend-online-shop-sla686.up.railway.app/api/v1'
 
 const styles = {
   cardMedia: {
