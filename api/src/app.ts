@@ -26,7 +26,7 @@ app.use(cookieParser())
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:4000',
-  'https://fullstack-online-shop.netlify.app',
+  'https://backend-online-shop-sla686.netlify.app',
 ]
 app.use(
   cors({
