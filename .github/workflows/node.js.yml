@@ -7,6 +7,10 @@ on:
   push:
     branches: ["dev", "main"]
 
+env:
+  MONGODB_URI: ${{ env.MONGODB_URI }}
+  JWT_SECRET: ${{ env.JWT_SECRET }}
+
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -30,9 +34,6 @@ jobs:
 
   # JOB to build and test backend code
   backend:
-    env:
-      MONGODB_URI: ${{ env.MONGODB_URI }}
-      JWT_SECRET: ${{ env.JWT_SECRET }}
     needs: changes
     if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
