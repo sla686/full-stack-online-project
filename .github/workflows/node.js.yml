@@ -30,6 +30,9 @@ jobs:
 
   # JOB to build and test backend code
   backend:
+    env:
+      MONGODB_URI: ${{ env.MONGODB_URI }}
+      JWT_SECRET: ${{ env.JWT_SECRET }}
     needs: changes
     if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
